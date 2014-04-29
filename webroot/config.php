@@ -68,8 +68,8 @@ $bwix['header'] = <<<EOD
 EOD;
 //dump('header');
 $bwix['footer'] = <<<EOD
-<footer><span class='sitefooter'>Copyright (c) Mikael Roos (me@mikaelroos.se) |
- Björn Viklund (erikwi2000@gmail.com)  | 
+<footer><span class='sitefooter'>Copyright (c) Björn Viklund (bjvi13@student.bth.se) |
+ Björn Wiklund (erikwi2000@gmail.com)  | 
  <a href='http://validator.w3.org/unicorn/check?ucn_uri=referer&amp;ucn_task=conformance'>Unicorn</a></span></footer>
 EOD;
 
@@ -111,6 +111,7 @@ EOD;
  */
 //$bwix['navbar'] = null; // To skip the navbar
 /*xxxxxxxxxxxxxxxxxxxxxxxx*/
+//pflimmer borttagifallatt
 $bwix['navbar'] = array(
 
   'class' => 'nb-plain',
@@ -119,6 +120,7 @@ $bwix['navbar'] = array(
     'hem'         => array('text'=>'Hem',         'url'=>'me.php',          'title' => 'Min presentation om mig själv'),
     'redovisning' => array('text'=>'Redovisning', 'url'=>'redovisning.php', 'title' => 'Redovisningar för kursmomenten'),
     'tarningsspel' => array('text'=>'Tärningsspel', 'url'=>'tarning.php', 'title' => 'SpelaTärning'),   
+     'pflimmer' => array('text'=>'Pflimmer', 'url'=>'pflimmer.php', 'title' => 'KollaFilm'),    
     'kallkod'     => array('text'=>'Källkod',     'url'=>'source.php',      'title' => 'Se källkoden'),
   ),
   'callback_selected' => function($url) {
