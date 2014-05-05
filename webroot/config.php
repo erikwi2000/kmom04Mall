@@ -30,7 +30,8 @@ define('BWI_THEME_PATH', BWI_INSTALL_PATH . 'theme/render.php');
 
 
 
-
+//session_name(preg_replace('/[:\.\/-_]/', '', __DIR__));
+//session_start();
 
 
 
@@ -55,7 +56,7 @@ $bwix = array();
  */
  
 $bwix['lang']         = 'sv';
-$bwix['title_append'] = ' | oophp kursmaterial';
+$bwix['title_append'] = ' | oophp';
 $bwix['stylesheets'] = array('css/style.css');
 $bwix['favicon']    = 'img/me1favicon.png';
 //<link rel='icon' href='img/me1favicon.png' >
@@ -105,6 +106,13 @@ EOD;
 //foreach ($bwix as $xx) { printf($xx) . "<br>";}
 
 
+$bwix['database']['dsn']            = 'mysql:host=localhost;dbname=Movie;';
+$bwix['database']['username']       = 'bjvi13';
+$bwix['database']['password']       = '';
+$bwix['database']['driver_options'] = array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'");
+
+// echo "Inside config<br>";
+//dumpa($bwix['database']);
 /**
  * The navbar
  *
@@ -112,6 +120,35 @@ EOD;
 //$bwix['navbar'] = null; // To skip the navbar
 /*xxxxxxxxxxxxxxxxxxxxxxxx*/
 //pflimmer borttagifallatt
+//    'login'     => array('text'=>'Login',         'url'=>'movie_login.php',          'title' => 'Logga in för att ändra i databasen'),
+
+$bwix['navbarFilm'] = array(
+
+  'class' => 'nb-plain2',
+//	 'class' => 'navbar',
+  'items' => array(
+    'hem'       => array('text'=>'Alla filmer',   'url'=>'movie_connect.php',        'title' => 'Alla filmer'),
+    'reset'     => array('text'=>'Återställ',     'url'=>'movie_reset.php',          'title' => 'Återställ'),
+    'titel'     => array('text'=>'Sök titel',     'url'=>'movie_search_title.php',   'title' => 'Sök film per titel'),
+    'year'      => array('text'=>'Sök per år',    'url'=>'movie_search_by_year.php', 'title' => 'Sök film per år'),
+    'genre'     => array('text'=>'Sök per genre', 'url'=>'movie_by_genre.php',       'title' => 'Sök film per genre'),
+    'sort'      => array('text'=>'Sortera',       'url'=>'movie_sort.php',           'title' => 'Sortera per kolumn'),
+    'page'      => array('text'=>'Paginering',    'url'=>'movie_page.php',           'title' => 'Dela upp resultatet på sidor'),
+    'login'     => array('text'=>'Login',         'url'=>'movie_login.php',          'title' => 'Logga in för att ändra i databasen'),
+    'logout'    => array('text'=>'Logout',        'url'=>'movie_logout.php',         'title' => 'Logga ut'),
+    'edit'      => array('text'=>'Uppdatera',     'url'=>'movie_view_edit.php',      'title' => 'Uppdatera info om film'),
+    'create'    => array('text'=>'Skapa',         'url'=>'movie_create.php',         'title' => 'Skapa ny film'),
+    'delete'    => array('text'=>'Radera',        'url'=>'movie_view_delete.php',    'title' => 'Radera film'),
+    'view'      => array('text'=>'Visa komplett', 'url'=>'movie_view.php',           'title' => 'Kombinerat sökalternativ på en sida'),
+    'kallkod'     => array('text'=>'Källkod',     'url'=>'source.php',      'title' => 'Se källkoden'),
+  ),
+  'callback_selected' => function($url) {
+    if(basename($_SERVER['SCRIPT_FILENAME']) == $url) {
+      return true;
+    }
+  }
+);
+
 $bwix['navbar'] = array(
 
   'class' => 'nb-plain',
@@ -140,8 +177,9 @@ $bwix['navbar'] = array(
  *
  */
 //$bwix['stylesheet'] = 'css/style.css';
-//$bwix['stylesheets'] = array('css/style.css');
-//$bwix['favicon']    = 'img/me1favicon.png';
+$bwix['stylesheets'] = array('css/style.css');
+$bwix['favicon']    = 'img/me1favicon.png';
+$bwix['inlinestyle']    = null;
 //xxxxx$bwix['favicon']    = 'favicon_oophp.ico';
 
 $bwix['stylesheets'][] = 'css/dice.css'; 

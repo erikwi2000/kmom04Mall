@@ -7,6 +7,7 @@
  * CSS sprite for a dice with six faces.
  *
  */
+ 
 ul.dice {
   margin: 0;
   padding: 0;
@@ -84,17 +85,29 @@ h1 {
  * Layout for navigation bar / menu
  */
 #navbar {
-  width: 70%;
-  margin-bottom: 2em;
-  margin-top: 1em;
+  width: 75%;
+  margin-bottom: 1em;
+  margin-top: 1px;
+  margin-left: 1px;
   padding:0.6em;
       background-color: #9F9;
 	background-color: #F21100;
 	  	border-radius:13px;
+border:7px solid #4b8f29;
+/*	border:7px solid #ee00ee;*/
+}
+#navbarFilm {
+  width: 75%;
+  margin-bottom: 1px;
+  margin-top: 1px;
+  margin-left: 1px;
+  padding: 0.1px;
+      background-color: #9F9;
+	background-color: #FFFFFF;
+	  	border-radius:23px;
 	border:7px solid #4b8f29;
 
 }
-
 
 /**
  * Layout for main
@@ -147,10 +160,10 @@ figcaption {
 figure.right {
   float: right;
 }
-/**
+
  * CSS sprite for a dice with six faces.
  *
- */
+ *
 ul.dice {
   margin: 0;
   padding: 0;
@@ -185,10 +198,13 @@ a.LinkButtonx {
   padding : 4px;
   border-color : #99FF00;
   	border-radius:13px;
-	border:7px solid #4b8f29;
+	border:7px solid #4b8f29; 
+
+	
        box-shadow: 0px 10px 14px -7px #3e7327;
 
 }
+
 
 a.LinkButton {
   border-style: solid;
@@ -202,16 +218,20 @@ a.LinkButton {
   margin : 1px;
  
   border-color : #990000;
-  	border-radius:13px;
-	border:7px solid #4b8f29;
+  	border-radius:33px;
+	border:7px solid #4b8f29;  
+
+	
         box-shadow: 0px 10px 14px -7px #3e7327;
     	box-shadow: -30px 10px 14px -7px #3e7327;
 }
+
+
 /**
  * Style for table
  */
 table,
 th,
 td {
-  border: 1px solid #ccc;
+  border: 2px solid #ccc;
 }

@@ -49,6 +49,8 @@ class CDatabase {
       self::$params     = $_SESSION['CDatabase']['params'];
       unset($_SESSION['CDatabase']);
     }
+	//	echo "Inside_CDatabase_construct_wwwwwwwwwwwwwwwwwww";
+	//	dumpa($default);
   }
   
   

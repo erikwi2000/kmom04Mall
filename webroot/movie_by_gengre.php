@@ -6,8 +6,7 @@
 // Include the essential config-file which also creates the $bwix 
 //variable with its defaults.
 include(__DIR__.'/config.php'); 
-session_name(preg_replace('/[:\.\/-_]/', '', __DIR__));
-session_start();
+
 // Do it and store it all in variables in the BWi container.
 $bwix['title'] = "Flimmer";
 
@@ -22,32 +21,14 @@ else {
 	$handle = new CFilmHandle();
   $_SESSION['filmhandle'] = $handle;
 }
-//*
-if(isset($_SESSION['CDatabase'])) {
-  $db = $_SESSION['CDatabase'];
-		dumpa($db);
-}
-else {
-	$db = new CDatabase($bwix['database']);
-	dumpa($db);
-  $_SESSION['CDatabase'] = $db;
-}
-//session_name(preg_replace('/[:\.\/-_]/', '', __DIR__));
-//session_start();
-//*/
-//$db = new CDatabase($bwix['database']);
-dumpa($handle);
-//dumpa($bwix);
-
-
-
-$fromdb = $handle->GetDBasePflimmerStart($bwix['database']);
+$genre = isset($_GET['genre']) ? $_GET['genre'] : null;
+$fromdb = $handle->GetDBaseByGenre($genre);
 
 //dumpa($fromdb);
 //-----------------------
 
-
-//------{$fromdb}-----------------------------
+//{$fromdb}
+//-----------------------------------
 
 
 $bwix['main'] = <<<EOD

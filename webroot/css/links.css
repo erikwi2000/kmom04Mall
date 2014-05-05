@@ -23,19 +23,8 @@ ul.icons li {
  */
 
  
-ul.nb-plain {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
 
-ul.nb-plain li {
-  padding: 1px 1px 1px 1px;
-  margin: 0.1em;
-  margin-left: 1px;
-    margin-right: 1px;
-  display: inline;
-}
+
 
 ul.nb-plain li:first-child {
   padding-left: 0;
@@ -50,7 +39,10 @@ border-top: 10px solid #993;
 }    
 
 ul.nb-plain a {
-  margin: 3px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
   padding: 3px;
   background-color: #AD3;
   	border-radius:13px;
@@ -68,6 +60,109 @@ ul.nb-plain a:hover {
   border-top: 7px solid #9FF;
      border-left: 7px solid #9FF;
   border-right: 7px solid #9FF;
+  border-bottom: 7px solid #9FF;
+  text-decoration: none;
+}
+
+
+// nb-plain2 for Film
+
+/** --------------------------------------------------------------
+ * Navbar: Plain style, nothing special
+ *
+ */
+
+ 
+ul.nb-plain2 {
+  list-style-type: none;
+  width: 800px;
+  padding: 1px;
+  margin: 1px;
+}
+ul.nb-plain {
+  list-style-type: none;
+  width: 800px;
+  padding: 0;
+  margin: 0;
+}
+
+ul.nb-plain li {
+  padding: 1px 1px 1px 1px;
+  margin: 0.1em;
+  margin-left: 1px;
+    margin-right: 1px;
+  display: inline;
+}
+
+ul.nb-plain2 li {
+  padding-left: 1px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-right: 1px;  
+
+  
+  margin-top: 1px;
+  margin-left: 1px;
+    margin-right: 1px;
+	margin-bottom: 1px;
+
+  display: inline;
+}
+
+ul.nb-plain2 li:first-child {
+  padding-left: 1px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-right: 1px;  
+    margin-top: 1px;
+  margin-left: 1px;
+    margin-right: 1px;
+	margin-bottom: 1px;
+  
+}
+
+ul.nb-plain2 li.selected a {
+  	border-radius:13px;
+	margin-top: 1px;
+	margin-left: 1px;
+	margin-right: 1px;
+	margin-bottom: 1px;
+	  padding-left: 1px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-right: 1px; 
+border-top: 10px solid #993;
+   border-left: 5px solid #993;
+  border-right: 5px solid #993;  
+  border-bottom: 10px solid #993;
+}    
+
+ul.nb-plain2 a {
+    margin-top: 1px;
+  margin-bottom: 1px;
+  margin-left: 1px;
+  margin-right: 1px;
+/*  padding: 3px; */
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 1px;
+  padding-right: 1px;
+  background-color: #AD3;
+  	border-radius:13px;
+  font-weight: bold;
+  text-decoration: none;
+  text-transform: uppercase;
+    border-top: 3px solid #993;
+     border-left: 3px solid #993;
+  border-right: 3px solid #993;  
+  border-bottom: 3px solid #993;
+}  
+
+ul.nb-plain2 a:hover {
+
+  border-top: 7px solid #9FF;
+     border-left: 1px solid #9FF;
+  border-right: 1px solid #9FF;
   border-bottom: 7px solid #9FF;
   text-decoration: none;
 }
