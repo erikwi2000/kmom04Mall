@@ -8,11 +8,10 @@
 include(__DIR__.'/config.php'); 
 
 // Do it and store it all in variables in the BWi container.
-$bwix['title'] = "Flimmer";
+$bwix['title'] = "PFlimmer";
 
-// Do it and store it all in variables in the BWi container.
-//$bwix['title'] = "Pflimmer";
-//echo getCurrentUrl();
+
+
 
 $bwix['inlinestyle'] = "
 .orderby a {
@@ -52,11 +51,14 @@ select {
   height: 10em;
 }
 ";
+ 
 
 session_name(preg_replace('/[:\.\/-_]/', '', __DIR__));
 session_start();
-$db = new CDatabase($bwix['database']);
 
+$db = new CDatabase($bwix['database']);
+dumpa($db);
+/*
 if(isset($_SESSION['filmhandle'])) {
   $handle = $_SESSION['filmhandle'];
 }
@@ -64,59 +66,39 @@ else {
 	$handle = new CFilmHandle();
   $_SESSION['filmhandle'] = $handle;
 }
-
-// Connect to a MySQL database using PHP PDO
-      
-//$db = new CDatabase($bwix['database']);
-/*
-if(isset($_SESSION['CDatabase'])) {
-  $db = $_SESSION['CDatabase'];
-	//	dumpa($db);
-}
-else {
-	$db = new CDatabase($bwix['database']);
-//	dumpa($db);
-  $_SESSION['CDatabase'] = $db;
-}    
- 
+ * 
  */
- 
+// Connect to a MySQL database using PHP PDO
 
 // Get parameters 
 $title  = isset($_POST['title']) ? strip_tags($_POST['title']) : null;
 $create = isset($_POST['create'])  ? true : false;
 $acronym = isset($_SESSION['user']) ? $_SESSION['user']->acronym : null;
 
-
 // Check that incoming parameters are valid
 isset($acronym) or die('Check: You must login to edit.');
-
 
 
 // Check if form was submitted
 if($create) {
   $sql = 'INSERT INTO Movie (title) VALUES (?)';
-	//     echo "<br>create<br>";
+	
   $db->ExecuteQuery($sql, array($title));
-		//     echo "<br>create2<br>";
-	//dumpa($db);
-			//     echo "<br>create3<br>";
+
   $db->SaveDebug();
-			//     echo "<br>create4<br>";
+			
   header('Location: movie_edit.php?id=' . $db->LastInsertId());
   exit;
 }
-
-
-
 // Do it and store it all in variables in the Anax container.
 $bwix['title'] = "Skapa ny film";
 
 $sqlDebug = $db->Dump();
-//dumpa($sqlDebug);
+dumpa($sqlDebug);
 //$bwix['main'] 
 
 $bwix['main']  = <<<EOD
+        
 <h1>{$bwix['title']}</h1>
 
 <form method=post>
@@ -126,10 +108,9 @@ $bwix['main']  = <<<EOD
   <p><input type='submit' name='create' value='Skapa'/></p>
   </fieldset>
 </form>
-
+{$bwix['byline']}
+</article>
 EOD;
-
-
 
 
 // Finally, leave it all to the rendering phase of Anax.

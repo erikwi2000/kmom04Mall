@@ -3,16 +3,12 @@
  * This is a BWi pagecontroller.
  *
  */
-// Include the essential config-file which also creates the $bwix 
-//variable with its defaults.
+
 include(__DIR__.'/config.php'); 
 
 // Do it and store it all in variables in the BWi container.
 $bwix['title'] = "Flimmer";
 
-// Do it and store it all in variables in the BWi container.
-//$bwix['title'] = "Pflimmer";
-//echo getCurrentUrl();
 
 if(isset($_SESSION['filmhandle'])) {
   $handle = $_SESSION['filmhandle'];
@@ -31,7 +27,6 @@ $bwix['inlinestyle'] = "
 }
 ";
 
-//0000000000000000000000000
 // Get parameters for sorting
 $orderby  = isset($_GET['orderby']) ? strtolower($_GET['orderby']) : 'id';
 $order    = isset($_GET['order'])   ? strtolower($_GET['order'])   : 'asc';
@@ -43,8 +38,6 @@ in_array($order, array('asc', 'desc')) or die('Check: Not valid sort order.');
 
 // Do SELECT from a table
 $sql = "SELECT * FROM VMovie ORDER BY $orderby $order;";
-
-
 $res = $db->ExecuteSelectQueryAndFetchAll($sql);
 
 /**
@@ -56,7 +49,6 @@ $res = $db->ExecuteSelectQueryAndFetchAll($sql);
 function orderby($column) {
   return "<span class='orderby'><a href='?orderby={$column}&order=asc'>&darr;</a><a href='?orderby={$column}&order=desc'>&uarr;</a></span>";
 }
-
 // Put results into a HTML-table
 $tr = "<tr><th>Rad</th><th>Id " . orderby('id') . "</th><th>Bild</th><th>Titel " . orderby('title') . "</th><th>År " . orderby('year') . "</th><th>Genre</th></tr>";
 foreach($res AS $key => $val) {
@@ -66,23 +58,17 @@ foreach($res AS $key => $val) {
 // Do it and store it all in variables in the Anax container.
 $bwix['title'] = "Sortera tabellens innehåll";
 
-//$anax['main'] 
-
-$trxx = <<<EOD
+        
+$bwix['main'] = <<<EOD
 <h1>{$bwix['title']}</h1>
 <p>Resultatet från SQL-frågan:</p>
 <p><code>{$sql}</code></p>
 <table>
 {$tr}
 </table>
-EOD;
-
-$bwix['main'] = <<<EOD
-{$trxx}
 {$bwix['byline']}
 </article>
 EOD;
-
 
 // Finally, leave it all to the rendering phase of BWi.
 //echo BWI_THEME_PATH;

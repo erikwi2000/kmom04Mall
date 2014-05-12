@@ -30,39 +30,10 @@ else {
 
 
 $db = new CDatabase($bwix['database']);
-/*
-$dsn      = 'mysql:host=localhost;dbname=Movie;';
-$login    = 'bjvi13';
-$password = '';
-$options  = array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'");
-
-*/
-/*
-try {
-    
-    $pdo = new PDO($dsn, $login, $password, $options);  
-  //$pdo = new PDO($hej['dsn'], $hej['username'], $hej['password'], $hej['driver_options']);	
-}
-catch(Exception $e) {
-  //throw $e; // For debug purpose, shows all connection details
-  throw new PDOException('Could not connect to database, hiding connection details.'); // Hide connection details.
-}
 
 
 
 
-$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-
- * 
- * //=========================================
- */
-//dumpa($pdo);
-//dumpa($handle);
-// Check if user is authenticated.
-//dumpa($pdo);
-
-
-//$res = $db->ExecuteSelectQueryAndFetchAll($sql);
 
 //	dumpa($db);
 
@@ -71,7 +42,6 @@ $acronym = isset($_SESSION['user']) ? $_SESSION['user']->acronym : null;
 //dumpa($acronym);
 if($acronym) {
   $output = "Du är inloggad som: $acronym ({$_SESSION['user']->name})";
-//  echo "<br>wwwwwwwwwwwwwwwwwwwwwwwwww<br>";
 }
 else {
   $output = "Du är INTE inloggad.";
@@ -102,12 +72,9 @@ echo "Inside Logon";
 }
 
 
-
 // Do it and store it all in variables in the Anax container.
 $bwix['title'] = "Login";
 
-
-//$trxx 
         
 $trxx = <<<EOD
 <h1>{$bwix['title']}</h1>
@@ -127,14 +94,6 @@ $trxx = <<<EOD
 EOD;
 
 
-
-//return $trxx;
-
-//dumpa($fromdb);
-//-----------------------
-
-//{$fromdb}
-//-----------------------------------
 
 
 $bwix['main'] = <<<EOD

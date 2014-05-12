@@ -67,6 +67,47 @@ $bwix['lang']         = 'sv';
 $bwix['title_append'] = ' | oophp';
 $bwix['stylesheets'] = array('css/webb.css');
 $bwix['stylesheets'] = array('css/style.css');
+//-------------------------
+$bwix['inlinestyle'] = "
+.orderby a {
+  text-decoration: none;
+  color: black;
+}
+
+.dbtable {
+
+}
+
+.dbtable table {
+  width: 100%;
+}
+
+.dbtable .rows {
+  text-align: right;
+}
+
+.dbtable .pages {
+  text-align: center;
+}
+
+.debug {
+  color: #666;
+}
+
+label {
+  font-size: smaller;
+}
+
+input[type=text] {
+  width: 300px;
+}
+
+select {
+  height: 10em;
+}
+";
+
+//------------------------------
 $bwix['favicon']    = 'img/me1favicon.png';
 //<link rel='icon' href='img/me1favicon.png' >
 $bwix['header'] = <<<EOD

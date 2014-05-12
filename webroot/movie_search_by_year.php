@@ -63,7 +63,7 @@ $year2 = htmlentities($year2);
 $paramsPrint = htmlentities(print_r($params, 1));
 //$bwix['main'] 
 
-$trxx = <<<EOD
+$bwix['main'] = <<<EOD
 <h1>{$bwix['title']}</h1>
 <form>
 <fieldset>
@@ -84,16 +84,12 @@ $trxx = <<<EOD
 <table>
 {$tr}
 </table>
+{$bwix['byline']}
+</article>
 EOD;
 
 //-----------------------------------
 
-
-$bwix['main'] = <<<EOD
-{$trxx}
-{$bwix['byline']}
-</article>
-EOD;
 // Finally, leave it all to the rendering phase of BWi.
 //echo BWI_THEME_PATH;
 include(BWI_THEME_PATH);

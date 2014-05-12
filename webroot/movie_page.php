@@ -7,7 +7,7 @@
 include(__DIR__.'/config.php'); 
 
 // Do it and store it all in variables in the BWi container.
-$bwix['title'] = "Flimmer";
+$bwix['title'] = "PFlimmer";
 
 
 if(isset($_SESSION['filmhandle'])) {
@@ -18,32 +18,9 @@ else {
   $_SESSION['filmhandle'] = $handle;
 }
 
-//dumpa($bwix['database']);
 
 
 $bwix['stylesheets'][] = '//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css';
-$bwix['inlinestyle'] = "
-.orderby a {
-  text-decoration: none;
-  color: black;
-}
-
-.dbtable {
-
-}
-
-.dbtable table {
-  width: 100%;
-}
-
-.dbtable .rows {
-  text-align: right;
-}
-
-.dbtable .pages {
-  text-align: center;
-}
-";
 
 $db = new CDatabase($bwix['database']);
 
@@ -65,8 +42,6 @@ $db = new CDatabase($bwix['database']);
 				// Return the modified querystring
 				return $prepend . http_build_query($query);
 			}
-
-
 
 			/**
 			 * Create links for hits per page.
@@ -107,20 +82,12 @@ $db = new CDatabase($bwix['database']);
 			}
 
 
-
-
-//mmm$db = new CDatabase($bwix['database']);
-
 // Get parameters for sorting
 $hits  = isset($_GET['hits']) ? $_GET['hits'] : 8;
 $page  = isset($_GET['page']) ? $_GET['page'] : 1;
-
-
 // Check that incoming is valid
 is_numeric($hits) or die('Check: Hits must be numeric.');
 is_numeric($page) or die('Check: Page must be numeric.');
-
-
 
 //===========================================
 // Get max pages from table, for navigation
@@ -153,7 +120,9 @@ $navigatePage = getPageNavigation($hits, $page, $max);
 
 //$anax['main'] 
 
-$trxx = <<<EOD
+//$trxx 
+        
+$bwix['main'] = <<<EOD
 <h1>{$bwix['title']}</h1>
 <p>Resultatet från SQL-frågan:</p>
 <p><code>{$sql}</code></p>
@@ -164,15 +133,9 @@ $trxx = <<<EOD
   </table>
   <div class='pages'>{$navigatePage}</div>
 </div>
-EOD;
-
-
-$bwix['main'] = <<<EOD
-{$trxx}
-{$bwix['byline']}
+  {$bwix['byline']}
 </article>
 EOD;
-
 
 // Finally, leave it all to the rendering phase of BWi.
 //echo BWI_THEME_PATH;

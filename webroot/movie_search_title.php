@@ -3,15 +3,13 @@
  * This is a BWi pagecontroller.
  *
  */
-// Include the essential config-file which also creates the $bwix 
+
 //variable with its defaults.
 include(__DIR__.'/config.php'); 
 
 // Do it and store it all in variables in the BWi container.
-$bwix['title'] = "Flimmer";
+$bwix['title'] = "PFlimmer";
 
-// Do it and store it all in variables in the BWi container.
-//$bwix['title'] = "Pflimmer";
 //echo getCurrentUrl();
 
 if(isset($_SESSION['filmhandle'])) {
@@ -21,7 +19,6 @@ else {
 	$handle = new CFilmHandle();
   $_SESSION['filmhandle'] = $handle;
 }
-
 
 $db = new CDatabase($bwix['database']);
 
@@ -39,7 +36,6 @@ else {
   $sql = "SELECT * FROM VMovie;";
   $params = null;
 }
-
 // Fetch search
 
 $res = $db->ExecuteSelectQueryAndFetchAll($sql, $params);
@@ -62,7 +58,7 @@ $paramsPrint = htmlentities(print_r($params, 1));
 
 //$bwix['main'] 
 
-$tr = <<<EOD
+$bwix['main'] = <<<EOD
 <h1>{$bwix['title']}</h1>
 <form>
 <fieldset>
@@ -77,23 +73,11 @@ $tr = <<<EOD
 <table>
 {$tr}
 </table>
-EOD;
-
-
-			//return $tr;
-
-//dumpa($fromdb);
-//-----------------------
-
-//{$fromdb}
-//-----------------------------------
-
-
-$bwix['main'] = <<<EOD
-{$tr}
 {$bwix['byline']}
 </article>
 EOD;
+
+
 
 
 // Finally, leave it all to the rendering phase of BWi.

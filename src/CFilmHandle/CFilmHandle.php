@@ -24,6 +24,14 @@ class CFilmHandle {
     return $i;
     */
   }
+  public function __sleep()
+{
+    return array();
+}
+  public function __wakeup()
+{
+    return array();
+}
   public function GetSeventen() {
       $iii= 17;
       
