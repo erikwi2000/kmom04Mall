@@ -4,14 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/xampp/htdocs/oophp/kmom04/kmom04Mall/webroot/pflimmer.php</file>
-            <file>file:/C:/xampp/htdocs/oophp/kmom04/kmom04Mall/webroot/tarning.php</file>
-            <file>file:/C:/xampp/htdocs/oophp/kmom04/kmom04Mall/webroot/movie_view_edit.php</file>
-            <file>file:/C:/xampp/htdocs/oophp/kmom04/kmom04Mall/webroot/config.php</file>
-            <file>file:/C:/xampp/htdocs/oophp/kmom04/kmom04Mall/webroot/movie_page.php</file>
-            <file>file:/C:/xampp/htdocs/oophp/kmom04/kmom04Mall/webroot/me.php</file>
-            <file>file:/C:/xampp/htdocs/oophp/kmom04/kmom04Mall/src/CFilmHandle/test.php</file>
+            <file>file:/C:/xampp/htdocs/oophp/kmom04/kmom04Mall/src/CDatabase/CDatabase.php</file>
             <file>file:/C:/xampp/htdocs/oophp/kmom04/kmom04Mall/src/CFilmHandle/CFilmHandle.php</file>
-            <file>file:/C:/xampp/htdocs/oophp/kmom04/kmom04Mall/src/bootstrap.php</file>
+            <file>file:/C:/xampp/htdocs/oophp/kmom04/kmom04Mall/webroot/movie_search_title.php</file>
         </group>
     </open-files>
 </project-private>

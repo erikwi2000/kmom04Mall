@@ -54,9 +54,18 @@ $bwix = array();
  * Site wide settings.
  *
  */
+/**
+ * Settings for the database.
+ *
+ */
+$bwix['database']['dsn']            = 'mysql:host=localhost;dbname=Movie;';
+$bwix['database']['username']       = 'bjvi13';
+$bwix['database']['password']       = '';
+$bwix['database']['driver_options'] = array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'");
  
 $bwix['lang']         = 'sv';
 $bwix['title_append'] = ' | oophp';
+$bwix['stylesheets'] = array('css/webb.css');
 $bwix['stylesheets'] = array('css/style.css');
 $bwix['favicon']    = 'img/me1favicon.png';
 //<link rel='icon' href='img/me1favicon.png' >

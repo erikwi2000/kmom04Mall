@@ -2,6 +2,7 @@
  * Main stylesheet
  */
 @import url(links.css);
+@import url(webb.css);
 
 /**
  * CSS sprite for a dice with six faces.

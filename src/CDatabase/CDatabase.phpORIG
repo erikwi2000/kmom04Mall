@@ -126,29 +126,32 @@ $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
    * @param int $fetchStyle can be changed by sending in arguments.
    * @return array with resultset.
    */
-    /**
-   * Execute a select-query with arguments and return the resultset.
-   * 
-   * @param string $query the SQL query with ?.
-   * @param array $params array which contains the argument to replace ?.
-   * @param boolean $debug defaults to false, set to true to print out the sql query before executing it.
-   * @return array with resultset.
-   */
-  public function ExecuteSelectQueryAndFetchAll($query, $params=array(), $debug=false) {
- 
-    self::$queries[] = $query; 
+  public function ExecuteSelectQueryAndFetchAll($query, $params=array(), $debug=false, $fetchStyle=null) {
+
+        // Log details on the query
+
+    self::$queries[] = $logQuery;
     self::$params[]  = $params; 
     self::$numQueries++;
- 
-    if($debug) {
-      echo "<p>Query = <br/><pre>{$query}</pre></p><p>Num query = " . self::$numQueries . "</p><p><pre>".print_r($params, 1)."</pre></p>";
-    }
- 
+
+
+// Make the query
     $this->stmt = $this->db->prepare($query);
     $this->stmt->execute($params);
-    return $this->stmt->fetchAll();
+    $res = $this->stmt->fetchAll($fetchStyle);
+    
+        $rows = count($res);
+    $logQuery = $query . "\n\nResultset has $rows rows.";
+    echo "här ExecuteSelectQueryAndFetchAll";
+dumpa($res);
+
+    // Debug if set
+    if($debug) {
+      echo "<p>Query = <br/><pre>{$logQuery}</pre></p><p>Num query = " . self::$numQueries . "</p><p><pre>".print_r($params, 1)."</pre></p>";
+    }
+
+    return $res;
   }
-   
 
 //=================================================== 
 

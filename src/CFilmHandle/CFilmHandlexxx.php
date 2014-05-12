@@ -104,7 +104,6 @@ catch(Exception $e) {
  * @param string $prepend this to the resulting query string
  * @return string with an updated query string.
  */
- 
 function getQueryString($options=array(), $prepend='?') {
   // parse query string into array
   $query = array();
@@ -1080,7 +1079,7 @@ return $trxx;
 
 public function GetDBaseMovieEdit($hej) {
 
-$bwix['inlinestyle'] = "
+$anax['inlinestyle'] = "
 .orderby a {
   text-decoration: none;
   color: black;
@@ -1185,7 +1184,6 @@ $trxx = <<<EOD
   <p><label>Titel:<br/><input type='text' name='title' value='{$movie->title}'/></label></p>
   <p><label>Årrr:<br/><input type='text' name='year' value='{$movie->year}'/></label></p>
   <p><label>Bild:<br/><input type='text' name='image' value='{$movie->image}'/></label></p>
-   
   <p><input type='submit' name='save' value='Spara'/> <input type='reset' value='Återställ'/></p>
   <p><a href='movie_view_edit.php'>Visa alla</a></p>
   <output>{$output}</output>

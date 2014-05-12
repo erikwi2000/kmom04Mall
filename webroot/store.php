@@ -6,8 +6,6 @@
 // Include the essential config-file which also creates the $anax variable with its defaults.
 include(__DIR__.'/config.php'); 
 
-$anax['stylesheets'][] = '//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css';
-
 $anax['inlinestyle'] = "
 .orderby a {
   text-decoration: none;
@@ -30,20 +28,6 @@ $anax['inlinestyle'] = "
   text-align: center;
 }
 
-td.menu {
-  padding-left: 1em;
-  padding-right: 1em;
-}
-
-td.menu a {
-  text-decoration: none;
-  color: #666;
-}
-
-td.menu a:hover {
-  color: #333;
-}
-
 .debug {
   color: #666;
 }
@@ -62,37 +46,73 @@ select {
 ";
 
 
+
 // Connect to a MySQL database using PHP PDO
 $db = new CDatabase($anax['database']);
 
 
-// Do SELECT from a table
-$sql = "SELECT * FROM Movie;";
-$res = $db->ExecuteSelectQueryAndFetchAll($sql);
+// Get parameters 
+$id     = isset($_POST['id'])    ? strip_tags($_POST['id']) : (isset($_GET['id']) ? strip_tags($_GET['id']) : null);
+$delete = isset($_POST['delete'])  ? true : false;
+$acronym = isset($_SESSION['user']) ? $_SESSION['user']->acronym : null;
 
 
-// Put results into a HTML-table
-$tr = "<tr><th>Rad</th><th>Id</th><th>Bild</th><th>Titel</th><th>År</th><th></th></tr>";
-foreach($res AS $key => $val) {
-  $tr .= "<tr><td>{$key}</td><td>{$val->id}</td><td><img width='80' height='40' src='{$val->image}' alt='{$val->title}' /></td><td>{$val->title}</td><td>{$val->year}</td><td class='menu'><a href='movie_edit.php?id={$val->id}'><i class='icon-edit'></i></a></td></tr>";
+
+// Check that incoming parameters are valid
+isset($acronym) or die('Check: You must login to delete.');
+
+
+
+// Check if form was submitted
+$output = null;
+if($delete) {
+
+  $sql = 'DELETE FROM Movie2Genre WHERE idMovie = ?';
+  $db->ExecuteQuery($sql, array($id));
+  $db->SaveDebug("Det raderades " . $db->RowCount() . " rader från databasen.");
+
+  $sql = 'DELETE FROM Movie WHERE id = ? LIMIT 1';
+  $db->ExecuteQuery($sql, array($id));
+  $db->SaveDebug("Det raderades " . $db->RowCount() . " rader från databasen.");
+
+  header('Location: movie_view_delete.php');
 }
 
 
+
+// Select information on the movie 
+$sql = 'SELECT * FROM Movie WHERE id = ?';
+$params = array($id);
+$res = $db->ExecuteSelectQueryAndFetchAll($sql, $params);
+
+if(isset($res[0])) {
+  $movie = $res[0];
+}
+else {
+  die('Failed: There is no movie with that id');
+}
+
+
+
 // Do it and store it all in variables in the Anax container.
-$anax['title'] = "Välj och uppdatera info om film";
+$anax['title'] = "Radera film";
 
 $sqlDebug = $db->Dump();
 
 $anax['main'] = <<<EOD
 <h1>{$anax['title']}</h1>
-<table>
-{$tr}
-</table>
+
+<form method=post>
+  <fieldset>
+  <legend>Radera film: {$movie->title}</legend>
+  <input type='hidden' name='id' value='{$id}'/>
+  <p><input type='submit' name='delete' value='Radera film'/></p>
+  </fieldset>
+</form>
 
 <div class=debug>{$sqlDebug}</div>
 
 EOD;
-
 
 
 

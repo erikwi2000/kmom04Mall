@@ -39,20 +39,9 @@ class CDatabase {
       //throw $e; // For debug purpose, shows all connection details
       throw new PDOException('Could not connect to database, hiding connection details.'); // Hide connection details.
     }
-  
+    
     $this->db->SetAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, $this->options['fetch_style']); 
- // $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-    
-        
-    $dsn      = 'mysql:host=localhost;dbname=Movie;';
-$login    = 'bjvi13';
-$password = '';
-$options  = array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'");
-$pdo = new PDO($dsn, $login, $password, $options);
-$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-    
-  
-  //  } 
+
     // Get debug information from session if any.
     if(isset($_SESSION['CDatabase'])) {
       self::$numQueries = $_SESSION['CDatabase']['numQueries'];
@@ -62,9 +51,9 @@ $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
     }
 	//	echo "Inside_CDatabase_construct_wwwwwwwwwwwwwwwwwww";
 	//	dumpa($default);
-  
-  
   }
+  
+  
   /**
    * Getters
    */
@@ -126,29 +115,27 @@ $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
    * @param int $fetchStyle can be changed by sending in arguments.
    * @return array with resultset.
    */
-    /**
-   * Execute a select-query with arguments and return the resultset.
-   * 
-   * @param string $query the SQL query with ?.
-   * @param array $params array which contains the argument to replace ?.
-   * @param boolean $debug defaults to false, set to true to print out the sql query before executing it.
-   * @return array with resultset.
-   */
-  public function ExecuteSelectQueryAndFetchAll($query, $params=array(), $debug=false) {
- 
-    self::$queries[] = $query; 
-    self::$params[]  = $params; 
-    self::$numQueries++;
- 
-    if($debug) {
-      echo "<p>Query = <br/><pre>{$query}</pre></p><p>Num query = " . self::$numQueries . "</p><p><pre>".print_r($params, 1)."</pre></p>";
-    }
- 
+  public function ExecuteSelectQueryAndFetchAll($query, $params=array(), $debug=false, $fetchStyle=null) {
+
+    // Make the query
     $this->stmt = $this->db->prepare($query);
     $this->stmt->execute($params);
-    return $this->stmt->fetchAll();
+    $res = $this->stmt->fetchAll($fetchStyle);
+
+    // Log details on the query
+    $rows = count($res);
+    $logQuery = $query . "\n\nResultset has $rows rows.";
+    self::$queries[] = $logQuery;
+    self::$params[]  = $params; 
+    self::$numQueries++;
+
+    // Debug if set
+    if($debug) {
+      echo "<p>Query = <br/><pre>{$logQuery}</pre></p><p>Num query = " . self::$numQueries . "</p><p><pre>".print_r($params, 1)."</pre></p>";
+    }
+
+    return $res;
   }
-   
 
 //=================================================== 
 
@@ -178,11 +165,7 @@ $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
       echo "<p>Query = <br/><pre>".htmlentities($logQuery)."</pre></p><p>Num query = " . self::$numQueries . "</p><p><pre>".htmlentities(print_r($params, 1))."</pre></p>";
     }
 
-   // return $res;
-        $this->stmt = $this->db->prepare($query);
-    return $this->stmt->execute($params);
-    
-    
+    return $res;
   }
 
 //=================================================== 
