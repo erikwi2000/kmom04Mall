@@ -17,12 +17,14 @@ class CFilmHandle {
   	
 
   public function __construct($aNumber=7) {
-         /*
+      /*   
       for($i=0; $i < $aNumber; $i++) {
      echo "Number:  " . $i;
     }
     return $i;
-    */
+       * */
+       
+    
   }
   public function __sleep()
 {
@@ -958,7 +960,7 @@ EOD;
  
 }
 
-public function GetDBaseMovieCreate($hej) {
+public function GetDBaseMovieCreatexxx($hej) {
 $bwix['inlinestyle'] = "
 .orderby a {
   text-decoration: none;
@@ -1050,6 +1052,7 @@ isset($acronym) or die('Check: You must login to edit.');
 // Check if form was submitted
 if($create) {
   $sql = 'INSERT INTO Movie (title) VALUES (?)';
+   echo "<br>Insert333<br>";
   $db->ExecuteQuery($sql, array($title));
   $db->SaveDebug();
   header('Location: movie_edit.php?id=' . $db->LastInsertId());

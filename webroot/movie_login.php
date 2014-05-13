@@ -23,22 +23,11 @@ else {
 	$handle = new CFilmHandle();
   $_SESSION['filmhandle'] = $handle;
 }
-//session_name(preg_replace('/[:\.\/-_]/', '', __DIR__));
-//session_start();
-//dumpa($bwix['database']);
-
 
 
 $db = new CDatabase($bwix['database']);
 
-
-
-
-
-//	dumpa($db);
-
 $acronym = isset($_SESSION['user']) ? $_SESSION['user']->acronym : null;
-//echo "<br> acronym<br";
 //dumpa($acronym);
 if($acronym) {
   $output = "Du är inloggad som: $acronym ({$_SESSION['user']->name})";
@@ -47,31 +36,19 @@ else {
   $output = "Du är INTE inloggad.";
 }
 
-
 // Check if user and password is okey
 if(isset($_POST['login'])) {
 echo "Inside Logon";
   $sql = "SELECT acronym, name FROM User WHERE acronym = ? AND password = md5(concat(?, salt))";
-  //	dumpa($sql);
-  
- // echo "Inside Logon";echo "Inside Logon";echo "Inside Logon";
-  
-  /*
-	$sth = $pdo->prepare($sql);
-  $sth->execute(array($_POST['acronym'], $_POST['password']));
-  $res = $sth->fetchAll();
-  */
+
    $res = $db->ExecuteSelectQueryAndFetchAll($sql,array($_POST['acronym'], $_POST['password']));
   
-  
-	dumpa($res);
+	//dumpa($res);
   if(isset($res[0])) {
     $_SESSION['user'] = $res[0];
   }
   header('Location: movie_login.php');
 }
-
-
 // Do it and store it all in variables in the Anax container.
 $bwix['title'] = "Login";
 

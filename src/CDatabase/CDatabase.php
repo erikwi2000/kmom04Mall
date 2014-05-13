@@ -43,8 +43,8 @@ class CDatabase {
     $this->db->SetAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, $this->options['fetch_style']); 
  // $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
     
-        
-    $dsn      = 'mysql:host=localhost;dbname=Movie;';
+       
+$dsn      = 'mysql:host=localhost;dbname=Movie;';
 $login    = 'bjvi13';
 $password = '';
 $options  = array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'");
@@ -54,10 +54,16 @@ $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
   
   //  } 
     // Get debug information from session if any.
+echo "outside";
     if(isset($_SESSION['CDatabase'])) {
+      echo "<br>inside";
       self::$numQueries = $_SESSION['CDatabase']['numQueries'];
       self::$queries    = $_SESSION['CDatabase']['queries'];
       self::$params     = $_SESSION['CDatabase']['params'];
+      foreach($_SESSION as $key => $value) 
+{ 
+    dumpa($value);//echo $key . " = " . $value . "<br>"; 
+}
       unset($_SESSION['CDatabase']);
     }
 	//	echo "Inside_CDatabase_construct_wwwwwwwwwwwwwwwwwww";
@@ -95,17 +101,11 @@ $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
    * @param string $debug enables to save some extra debug information.
    */
   public function SaveDebug($debug=null) {
-    
-		
-		
-		
-		
-		if($debug) {
+    	
+if($debug) {
       self::$queries[] = $debug;
       self::$params[] = null;
     }
-
-		
 		
     self::$queries[] = 'Saved debuginformation to session.';
     self::$params[] = null;
@@ -126,14 +126,7 @@ $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
    * @param int $fetchStyle can be changed by sending in arguments.
    * @return array with resultset.
    */
-    /**
-   * Execute a select-query with arguments and return the resultset.
-   * 
-   * @param string $query the SQL query with ?.
-   * @param array $params array which contains the argument to replace ?.
-   * @param boolean $debug defaults to false, set to true to print out the sql query before executing it.
-   * @return array with resultset.
-   */
+   
   public function ExecuteSelectQueryAndFetchAll($query, $params=array(), $debug=false) {
  
     self::$queries[] = $query; 

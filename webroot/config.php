@@ -189,7 +189,7 @@ $bwix['navbarFilm'] = array(
     'edit'      => array('text'=>'Uppdatera',     'url'=>'movie_view_edit.php',      'title' => 'Uppdatera info om film'),
     'create'    => array('text'=>'Skapa',         'url'=>'movie_create.php',         'title' => 'Skapa ny film'),
     'delete'    => array('text'=>'Radera',        'url'=>'movie_view_delete.php',    'title' => 'Radera film'),
-    'view'      => array('text'=>'Visa komplett', 'url'=>'movie_view.php',           'title' => 'Kombinerat sökalternativ på en sida'),
+    'view'      => array('text'=>'Visa_komplett', 'url'=>'movie_view.php',           'title' => 'Kombinerat sökalternativ på en sida'),
     'kallkod'     => array('text'=>'Källkod',     'url'=>'source.php',      'title' => 'Se källkoden'),
   ),
   'callback_selected' => function($url) {

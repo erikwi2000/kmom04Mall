@@ -11,10 +11,10 @@ session_start();
 // Do it and store it all in variables in the BWi container.
 $bwix['title'] = "Flimmer";
 
-// Do it and store it all in variables in the BWi container.
-//$bwix['title'] = "Pflimmer";
-//echo getCurrentUrl();
 
+
+
+/*
 if(isset($_SESSION['filmhandle'])) {
   $handle = $_SESSION['filmhandle'];
 }
@@ -22,7 +22,11 @@ else {
 	$handle = new CFilmHandle();
   $_SESSION['filmhandle'] = $handle;
 }
+
+*/
 //*
+
+/*
 if(isset($_SESSION['CDatabase'])) {
   $db = $_SESSION['CDatabase'];
 		//dumpa($db);
@@ -32,17 +36,9 @@ else {
 //	dumpa($db);
   $_SESSION['CDatabase'] = $db;
 }
-//session_name(preg_replace('/[:\.\/-_]/', '', __DIR__));
-//session_start();
-//*/
-//$db = new CDatabase($bwix['database']);
-//dumpa($handle);
-//dumpa($bwix);
 
-
-
+*/
 //$fromdb = $handle->GetDBasePflimmerStart($bwix['database']);
-
 
 $bwix['title'] = "STARTA FILMANDE";
 
@@ -51,13 +47,6 @@ $bwix['main']  = <<<EOD
 EOD;
 
 
-
-
-//dumpa($fromdb);
-//-----------------------
-
-
-//------{$fromdb}-----------------------------
 
 
 $bwix['main'] = <<<EOD

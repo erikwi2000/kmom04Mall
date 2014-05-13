@@ -18,6 +18,8 @@ else {
   $_SESSION['filmhandle'] = $handle;
 }
 
+
+
 $db = new CDatabase($bwix['database']);
 
 // Do SELECT from a table
