@@ -14,6 +14,15 @@ $bwix['title'] = "Flimmer";
 //$bwix['title'] = "Pflimmer";
 //echo getCurrentUrl();
 
+/*
+if(isset($_SESSION['cdatabase'])) {
+  $db = $_SESSION['cdatabase'];
+}
+else {
+	$db = new CDatabase($bwix['database']);
+  $_SESSION['cdatabase'] = $db;
+}
+*/
 if(isset($_SESSION['filmhandle'])) {
   $handle = $_SESSION['filmhandle'];
 }

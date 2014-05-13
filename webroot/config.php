@@ -24,36 +24,15 @@ define('BWI_INSTALL_PATH', __DIR__ . '/../');
 define('BWI_THEME_PATH', BWI_INSTALL_PATH . 'theme/render.php');
 //echo  "BWI theme path <br>" . BWI_THEME_PATH . "</br>";
 //	var_dump(BWI_THEME_PATH);
-//------------------------------------------------------------------
-
-//-------------------------------------------------------------
-
-
-
 //session_name(preg_replace('/[:\.\/-_]/', '', __DIR__));
 //session_start();
 
-
-
-/**
- * Include bootstrapping functions.
- *
- */
-  //echo "+++---+++ " . BWI_INSTALL_PATH;
 include(BWI_INSTALL_PATH . '/src/bootstrap.php');
 //echo "<br>BWI install path <br>" .  BWI_INSTALL_PATH;
 //echo BWI_INSTALL_PATH . '/src/bootstrap.php';
 
-/**
- * Create the BWi variable.
- *
- */
 $bwix = array();
 
-/**
- * Site wide settings.
- *
- */
 /**
  * Settings for the database.
  *
@@ -138,28 +117,26 @@ $bwix['byline'] = <<<EOD
       <li><a href='http://se.linkedin.com/in/erikwi2000'><img src='img/glyphicons/png/glyphicons_377_linked_in.png' alt='linkedin-icon' title='Björn Viklund på LinkedIn' width='24' height='24'/></a></li>
       <li><a href='https://www.facebook.com/oldman24'><img src='img/glyphicons/png/glyphicons_390_facebook.png' alt='facebook-icon' title='Björn Viklund på Facebook' width='24' height='24'/></a></li>
       <li><a href='https://twitter.com/erikwi2000'><img src='img/glyphicons/png/glyphicons_392_twitter.png' alt='twitter-icon' title='Björn Viklund på Twitter' width='24' height='24'/></a></li>
- <!--       <li><a href='http://mikaelroos.se/youtube'><img src='img/glyphicons/png/glyphicons_382_youtube.png' alt='youtube-icon' title='Björn Viklund på YouTube' width='24' height='24'/></a></li>
-             <li><a href='http://mikaelroos.se/flickr'><img src='img/glyphicons/png/glyphicons_395_flickr.png' alt='flickr-icon' title='Björn Viklund på Flickr' width='24' height='24'/></a></li>
+ <!-- <li><a href='http://mikaelroos.se/youtube'><img src='img/glyphicons/png/glyphicons_382_youtube.png' alt='youtube-icon' title='Björn Viklund på YouTube' width='24' height='24'/></a></li>
+      <li><a href='http://mikaelroos.se/flickr'><img src='img/glyphicons/png/glyphicons_395_flickr.png' alt='flickr-icon' title='Björn Viklund på Flickr' width='24' height='24'/></a></li>
   -->
-	<li><a href='http://instagram.com/erikwi2000'><img src='img/glyphicons/png/glyphicons_412_instagram.png' alt='instagram-icon' title='Björn Viklund på Instagram' width='24' height='24'/></a></li>
-	<li><a href='https://github.com/erikwi2000'><img src='img/glyphicons/png/glyphicons_381_github.png' alt='github-icon' title='Björn Viklund på GitHub' width='24' height='24'/></a></li>
-    
-
-		
-		</ul>
+      <li><a href='http://instagram.com/erikwi2000'><img src='img/glyphicons/png/glyphicons_412_instagram.png' alt='instagram-icon' title='Björn Viklund på Instagram' width='24' height='24'/></a></li>
+      <li><a href='https://github.com/erikwi2000'><img src='img/glyphicons/png/glyphicons_381_github.png' alt='github-icon' title='Björn Viklund på GitHub' width='24' height='24'/></a></li>
+    	
+    </ul>
   </nav>
-
 </footer>
 EOD;
 
 //HÄR!
-//foreach ($bwix as $xx) { printf($xx) . "<br>";}
-
-
+//foreach ($bwix as $xx) { printf($xx) . "<br>";
+/*
 $bwix['database']['dsn']            = 'mysql:host=localhost;dbname=Movie;';
 $bwix['database']['username']       = 'bjvi13';
 $bwix['database']['password']       = '';
 $bwix['database']['driver_options'] = array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'");
+ * *
+ */
 
 // echo "Inside config<br>";
 //dumpa($bwix['database']);
@@ -167,10 +144,6 @@ $bwix['database']['driver_options'] = array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET
  * The navbar
  *
  */
-//$bwix['navbar'] = null; // To skip the navbar
-/*xxxxxxxxxxxxxxxxxxxxxxxx*/
-//pflimmer borttagifallatt
-//    'login'     => array('text'=>'Login',         'url'=>'movie_login.php',          'title' => 'Logga in för att ändra i databasen'),
 
 $bwix['navbarFilm'] = array(
 
@@ -190,7 +163,7 @@ $bwix['navbarFilm'] = array(
     'create'    => array('text'=>'Skapa',         'url'=>'movie_create.php',         'title' => 'Skapa ny film'),
     'delete'    => array('text'=>'Radera',        'url'=>'movie_view_delete.php',    'title' => 'Radera film'),
     'view'      => array('text'=>'Visa_komplett', 'url'=>'movie_view.php',           'title' => 'Kombinerat sökalternativ på en sida'),
-    'kallkod'     => array('text'=>'Källkod',     'url'=>'source.php',      'title' => 'Se källkoden'),
+    'kallkod'   => array('text'=>'Källkod',     'url'=>'source.php',      'title' => 'Se källkoden'),
   ),
   'callback_selected' => function($url) {
     if(basename($_SERVER['SCRIPT_FILENAME']) == $url) {
@@ -204,11 +177,11 @@ $bwix['navbar'] = array(
   'class' => 'nb-plain',
 //	 'class' => 'navbar',
   'items' => array(
-    'hem'         => array('text'=>'Hem',         'url'=>'me.php',          'title' => 'Min presentation om mig själv'),
-    'redovisning' => array('text'=>'Redovisning', 'url'=>'redovisning.php', 'title' => 'Redovisningar för kursmomenten'),
-    'tarningsspel' => array('text'=>'Tärningsspel', 'url'=>'tarning.php', 'title' => 'SpelaTärning'),   
-     'pflimmer' => array('text'=>'Pflimmer', 'url'=>'pflimmer.php', 'title' => 'KollaFilm'),    
-    'kallkod'     => array('text'=>'Källkod',     'url'=>'source.php',      'title' => 'Se källkoden'),
+    'hem'          => array('text'=>'Hem',          'url'=>'me.php',          'title' => 'Min presentation om mig själv'),
+    'redovisning'  => array('text'=>'Redovisning',  'url'=>'redovisning.php', 'title' => 'Redovisningar för kursmomenten'),
+    'tarningsspel' => array('text'=>'Tärningsspel', 'url'=>'tarning.php',     'title' => 'SpelaTärning'),   
+    'pflimmer'     => array('text'=>'Pflimmer',     'url'=>'pflimmer.php',    'title' => 'KollaFilm'),    
+    'kallkod'      => array('text'=>'Källkod',      'url'=>'source.php',      'title' => 'Se källkoden'),
   ),
   'callback_selected' => function($url) {
     if(basename($_SERVER['SCRIPT_FILENAME']) == $url) {
@@ -216,10 +189,6 @@ $bwix['navbar'] = array(
     }
   }
 );
-/*xxxxxxxxxxxxxxxxxxxx*/
-
-
-
 
 
 /**

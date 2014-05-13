@@ -54,15 +54,14 @@ $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
   
   //  } 
     // Get debug information from session if any.
-echo "outside";
+
     if(isset($_SESSION['CDatabase'])) {
-      echo "<br>inside";
       self::$numQueries = $_SESSION['CDatabase']['numQueries'];
       self::$queries    = $_SESSION['CDatabase']['queries'];
       self::$params     = $_SESSION['CDatabase']['params'];
       foreach($_SESSION as $key => $value) 
 { 
-    dumpa($value);//echo $key . " = " . $value . "<br>"; 
+   // dumpa($value);//echo $key . " = " . $value . "<br>"; 
 }
       unset($_SESSION['CDatabase']);
     }
@@ -132,7 +131,7 @@ if($debug) {
     self::$queries[] = $query; 
     self::$params[]  = $params; 
     self::$numQueries++;
- 
+
     if($debug) {
       echo "<p>Query = <br/><pre>{$query}</pre></p><p>Num query = " . self::$numQueries . "</p><p><pre>".print_r($params, 1)."</pre></p>";
     }
@@ -154,29 +153,19 @@ if($debug) {
    * @return boolean returns TRUE on success or FALSE on failure. 
    */
   public function ExecuteQuery($query, $params = array(), $debug=false) {
-
-    // Make the query
-    $this->stmt = $this->db->prepare($query);
-    $res = $this->stmt->execute($params);
-
-    // Log details on the query
-    $error = $res ? null : "\n\nError in executing query: " . $this->ErrorCode() . " " . print_r($this->ErrorInfo(), 1);
-    $logQuery = $query . $error;
-    self::$queries[] = $logQuery; 
+ 
+    self::$queries[] = $query; 
     self::$params[]  = $params; 
     self::$numQueries++;
-
-    // Debug if set
+ 
     if($debug) {
-      echo "<p>Query = <br/><pre>".htmlentities($logQuery)."</pre></p><p>Num query = " . self::$numQueries . "</p><p><pre>".htmlentities(print_r($params, 1))."</pre></p>";
+      echo "<p>Query = <br/><pre>{$query}</pre></p><p>Num query = " . self::$numQueries . "</p><p><pre>".print_r($params, 1)."</pre></p>";
     }
-
-   // return $res;
-        $this->stmt = $this->db->prepare($query);
+ 
+    $this->stmt = $this->db->prepare($query);
     return $this->stmt->execute($params);
-    
-    
   }
+
 
 //=================================================== 
 

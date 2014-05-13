@@ -24,7 +24,6 @@ else {
 	$db = new CDatabase($bwix['database']);
   $_SESSION['cdatabase'] = $db;
 }
-
 */
 
 
@@ -77,9 +76,7 @@ $db = new CDatabase($bwix['database']);
 
 // Get parameters 
 $title  = isset($_POST['title']) ? strip_tags($_POST['title']) : null;
-echo "<br>title" . $title;
 $create = isset($_POST['create'])  ? true : false;
-echo "<br>create" . $create;
 $acronym = isset($_SESSION['user']) ? $_SESSION['user']->acronym : null;
 
 
