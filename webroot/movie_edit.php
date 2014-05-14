@@ -62,7 +62,7 @@ $db = new CDatabase($bwix['database']);
 $id     = isset($_POST['id'])    ? strip_tags($_POST['id']) : (isset($_GET['id']) ? strip_tags($_GET['id']) : null);
 $title  = isset($_POST['title']) ? strip_tags($_POST['title']) : null;
 $year   = isset($_POST['year'])  ? strip_tags($_POST['year'])  : null;
-$image  = isset($_POST['image']) ? strip_tags($_POST['image']) : null;
+$image  = isset($_POST['image']) ? $_POST['image'] : null;
 $genre  = isset($_POST['genre']) ? $_POST['genre'] : array();
 $save   = isset($_POST['save'])  ? true : false;
 $acronym = isset($_SESSION['user']) ? $_SESSION['user']->acronym : null;
@@ -81,11 +81,12 @@ if($save) {
   $sql = '
     UPDATE Movie SET
       title = ?,
-      year = ?
+      year = ?,
+      image = ?
     WHERE 
       id = ?
   ';
-  $params = array($title, $year, $id);
+  $params = array($title, $year, $image, $id);
   $db->ExecuteQuery($sql, $params);
   $output = 'Informationen sparades.';
 }

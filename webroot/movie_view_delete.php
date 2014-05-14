@@ -151,7 +151,10 @@ $res = $db->ExecuteSelectQueryAndFetchAll($sql);
 // Put results into a HTML-table
 $tr = "<tr><th>Rad</th><th>Id</th><th>Bild</th><th>Titel</th><th>År</th><th></th></tr>";
 foreach($res AS $key => $val) {
-  $tr .= "<tr><td>{$key}</td><td>{$val->id}</td><td><img width='80' height='40' src='{$val->image}' alt='{$val->title}' /></td><td>{$val->title}</td><td>{$val->year}</td><td class='menu'><a href='movie_delete.php?id={$val->id}'><i class='icon-remove-sign'></i></a></td></tr>";
+  $tr .= "<tr><td>{$key}</td><td>{$val->id}</td><td><img width='80' height='40' "
+  . "src='{$val->image}' alt='{$val->title}' /></td><td>{$val->title}</td>"
+  . "<td>{$val->YEAR}</td><td class='menu'><a href='movie_delete.php?id={$val->id}'>"
+  . "<i class='icon-remove-sign'></i></a></td></tr>";
 }
 
 

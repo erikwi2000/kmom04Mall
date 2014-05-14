@@ -18,21 +18,12 @@ ini_set('output_buffering', 0);   // Do not buffer outputs, write directly
 /** * Define BWi paths.
  *
  */
- //echo "<br> Dir <br>" . __DIR__ . "<br>";
 define('BWI_INSTALL_PATH', __DIR__ . '/../');
-//echo "BWI install path <br>" . BWI_INSTALL_PATH . "</br>";
 define('BWI_THEME_PATH', BWI_INSTALL_PATH . 'theme/render.php');
-//echo  "BWI theme path <br>" . BWI_THEME_PATH . "</br>";
-//	var_dump(BWI_THEME_PATH);
 //session_name(preg_replace('/[:\.\/-_]/', '', __DIR__));
 //session_start();
-
 include(BWI_INSTALL_PATH . '/src/bootstrap.php');
-//echo "<br>BWI install path <br>" .  BWI_INSTALL_PATH;
-//echo BWI_INSTALL_PATH . '/src/bootstrap.php';
-
 $bwix = array();
-
 /**
  * Settings for the database.
  *
@@ -128,18 +119,6 @@ $bwix['byline'] = <<<EOD
 </footer>
 EOD;
 
-//HÄR!
-//foreach ($bwix as $xx) { printf($xx) . "<br>";
-/*
-$bwix['database']['dsn']            = 'mysql:host=localhost;dbname=Movie;';
-$bwix['database']['username']       = 'bjvi13';
-$bwix['database']['password']       = '';
-$bwix['database']['driver_options'] = array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'");
- * *
- */
-
-// echo "Inside config<br>";
-//dumpa($bwix['database']);
 /**
  * The navbar
  *
@@ -150,13 +129,13 @@ $bwix['navbarFilm'] = array(
   'class' => 'nb-plain2',
 //	 'class' => 'navbar',
   'items' => array(
-    'hem'       => array('text'=>'Alla filmer',   'url'=>'movie_connect.php',        'title' => 'Alla filmer'),
+ //   'hem'       => array('text'=>'Alla filmer',   'url'=>'movie_connect.php',        'title' => 'Alla filmer'),
     'reset'     => array('text'=>'Återställ',     'url'=>'movie_reset.php',          'title' => 'Återställ'),
-    'titel'     => array('text'=>'Sök titel',     'url'=>'movie_search_title.php',   'title' => 'Sök film per titel'),
-    'year'      => array('text'=>'Sök per år',    'url'=>'movie_search_by_year.php', 'title' => 'Sök film per år'),
-    'genre'     => array('text'=>'Sök per genre', 'url'=>'movie_by_genre.php',       'title' => 'Sök film per genre'),
-    'sort'      => array('text'=>'Sortera',       'url'=>'movie_sort.php',           'title' => 'Sortera per kolumn'),
-    'page'      => array('text'=>'Paginering',    'url'=>'movie_page.php',           'title' => 'Dela upp resultatet på sidor'),
+  //  'titel'     => array('text'=>'Sök titel',     'url'=>'movie_search_title.php',   'title' => 'Sök film per titel'),
+  //  'year'      => array('text'=>'Sök per år',    'url'=>'movie_search_by_year.php', 'title' => 'Sök film per år'),
+  //  'genre'     => array('text'=>'Sök per genre', 'url'=>'movie_by_genre.php',       'title' => 'Sök film per genre'),
+  //  'sort'      => array('text'=>'Sortera',       'url'=>'movie_sort.php',           'title' => 'Sortera per kolumn'),
+  //  'page'      => array('text'=>'Paginering',    'url'=>'movie_page.php',           'title' => 'Dela upp resultatet på sidor'),
     'login'     => array('text'=>'Login',         'url'=>'movie_login.php',          'title' => 'Logga in för att ändra i databasen'),
     'logout'    => array('text'=>'Logout',        'url'=>'movie_logout.php',         'title' => 'Logga ut'),
     'edit'      => array('text'=>'Uppdatera',     'url'=>'movie_view_edit.php',      'title' => 'Uppdatera info om film'),

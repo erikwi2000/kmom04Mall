@@ -1,4 +1,4 @@
-movieCREATE DATABASE IF NOT EXISTS Movie;
+CREATE DATABASE IF NOT EXISTS Movie;
  
 USE Movie;
  --
@@ -84,9 +84,8 @@ CREATE TABLE Movie2Genre
  
  
 INSERT INTO Movie2Genre (idMovie, idGenre) VALUES
-  (1, 1),
-  (1, 5),
-  (1, 6),
+  (1, 7),
+  (1, 9),
   (2, 1),
   (2, 2),
   (2, 3),
@@ -209,16 +208,21 @@ INSERT INTO Movie (title, YEAR, image) VALUES
 ;
 
 INSERT INTO Movie (title, YEAR, image) VALUES
-  ('Pu xxxxx', 1994, 'img/movie/six.jpg')
+  ('Pu xxxxx', 1994, 'img/movie/six.jpg'),
+  ('xxxxx', 1994, 'img/movie/eight.jpg'),
+  ('gröten', 1994, 'img/movie/seven.jpg')
 ;
+use movie;
 
 INSERT INTO Movie2Genre (idMovie, idGenre) VALUES
-
     (6, 3),
 	  (6, 5),
 	    (6, 7),
 		  (7, 4),
 		    (7, 6)
 ;
+use Movie2Genre;
 
-SELECT * FROM Movie ;
+SELECT * FROM VMovie ;
+
+

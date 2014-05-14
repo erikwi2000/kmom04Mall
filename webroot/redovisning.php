@@ -44,6 +44,13 @@ $bwix['paths3'] .= '<p>me-sida:<a href="' . $mepath . '">me-sidan</a>';
 $bwix['paths3'] .= '<p>bwix:<a href="' . $mepath . "/../hello.php" . '">bwix-sidan</a>';
 $bwix['paths3'] .= '<p>github: <a href="https://github.com/erikwi2000/kmom03Mall">github</a>';
 
+// Fixa länkarna både statiska och dynamiska kmom02
+$bwix['paths4'] = '<p>me-sida:<a href="http://www.student.bth.se/~bjvi13/oophp/kmom04/kmom04Mall/webroot/me.php">me-sidan</a>';
+$bwix['paths4'] .= '<p>bwix: <a href="http://www.student.bth.se/~bjvi13/oophp/kmom04/kmom04Mall/webroot/hello.php">bwix-sidan</a>' ;
+$bwix['paths4'] .= '<p>me-sida:<a href="' . $mepath . '">me-sidan</a>';
+$bwix['paths4'] .= '<p>bwix:<a href="' . $mepath . "/../hello.php" . '">bwix-sidan</a>';
+$bwix['paths4'] .= '<p>github: <a href="https://github.com/erikwi2000/kmom04Mall">github</a>';
+
 
 $bwix['main'] = <<<EOD
 <article class="readable">
@@ -165,15 +172,43 @@ http://dbwebb.se/forum/viewtopic.php?f=37&amp;t=2161&amp;p=18393#p18393
 <p>PS: Har minskat kod i pagecontroller ännu mer. DS
 
 {$bwix['paths3']} 
-<h2>Kmom04: ...</h2>
+<h2>Kmom04: PHP PDO och MySQL</h2>
 
-<p>Redovisningstext...
-www.websequencediagrams.com så nice speciellt napkin<br>
+<p>Jaa ett väldigt intressant och lärande avsnitt. <p>Kanske aningen "pilligt" i vissa delar 
+    då både oophp och MySQL skall exekveras dock gick det ganska bra på den tid som var förespeglad 
+15-22 timmar egentligen inga stora problem. 
+    <p>Nja nu kanske jag tar i lite granna.
+<br>Tidsåtgången stämmer vad gäller redovisning såväl som allt annat som jag förberett för
+"ifyllnad" vartefter men det övriga?
+<p>Jaa även läsanvisningar fungerade väl, allt läst och en del förstått. 
+    <br>Men uppgifterna osv
+<h3><b>speciellt uppmaningen att "göra själv". </b></h3>
+    <p>Valde en lösning "CFilmhandle" medn fick en liten bit kvar <br>som mest landade jag på 2000 rader!
+<p>Då gav jag upp och tittade mer i "fusklappen" och gjorde på det sättet i stället, mycket enklare. Nåväl jag kanske inte har gjort
+det som skulle göras o/e på rätt sätt heller.
+    <p>Jag önskar att det fanns ett tydligare top-down  bottom-up 
+förfarnade som visas så att man får de stora dragen klara för sig 
+    och sedan kan man lägga detaljer senare.
+<br>Sedan är dessutom inloggningar och dylikt lite trickiga också. 
+    <br>Där det förutom allta annat finns 
+olika servrar WAMP, XAMPP och kanske någon mer ihop med Unix/Windows. 
+    <br>Sedan olika MySQL verktyg (3?) lokala och på server...mycket
+att tänka på. <p>Vore bra att slippa pilla för mycket med sådant.
+Men en sak ska sägas: <h4>Man lär sig himla mycket</h4> men det tar alldeles för mycket
+    tid i förhållande till de 20 timmar ni sagt.
+<p>Har man förkunskaper visst men om man inte har, ej krav, då blir det svårt att klara 
+    varje moment på en halv arbetsvecka.
+<ul>
+    ¨<li>www.websequencediagrams.com så nice speciellt napkin</li>
+<li>NetBeans</li>
+<li>http://www.picresize.com/</li>
+<li>m.fl.</>
+</ul>
 
 
-</p>
 
 
+{$bwix['paths4']} 
 <h2>Kmom05: ...</h2>
 
 <p>Redovisningstext...</p>

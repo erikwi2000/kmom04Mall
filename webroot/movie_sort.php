@@ -52,7 +52,9 @@ function orderby($column) {
 // Put results into a HTML-table
 $tr = "<tr><th>Rad</th><th>Id " . orderby('id') . "</th><th>Bild</th><th>Titel " . orderby('title') . "</th><th>År " . orderby('year') . "</th><th>Genre</th></tr>";
 foreach($res AS $key => $val) {
-  $tr .= "<tr><td>{$key}</td><td>{$val->id}</td><td><img width='80' height='40' src='{$val->image}' alt='{$val->title}' /></td><td>{$val->title}</td><td>{$val->year}</td><td>{$val->genre}</td></tr>";
+  $tr .= "<tr><td>{$key}</td><td>{$val->id}</td><td><img width='80' height='40'"
+  . " src='{$val->image}' alt='{$val->title}' /></td><td>{$val->title}</td>"
+  . "<td>{$val->YEAR}</td><td>{$val->genre}</td></tr>";
 }
 
 // Do it and store it all in variables in the Anax container.
