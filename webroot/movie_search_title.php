@@ -12,8 +12,6 @@ $bwix['title'] = "PFlimmer";
 
 //echo getCurrentUrl();
 
-
-
 if(isset($_SESSION['filmhandle'])) {
   $handle = $_SESSION['filmhandle'];
 }
