@@ -5,6 +5,8 @@
  */
 // Include the essential config-file which also creates the $anax variable with its defaults.
 include(__DIR__.'/config.php'); 
+session_name(preg_replace('/[:\.\/-_]/', '', __DIR__));
+if (!isset($_SESSION)) { session_start(); }
 
 if(isset($_SESSION['filmhandle'])) {
   $handle = $_SESSION['filmhandle'];
@@ -72,6 +74,13 @@ select {
 
 // Connect to a MySQL database using PHP PDO
 $db = new CDatabase($bwix['database']);
+$_SESSION['cdatabase'] = $db;
+
+
+
+
+
+
 
 
 // Get parameters 
@@ -84,28 +93,71 @@ $acronym = isset($_SESSION['user']) ? $_SESSION['user']->acronym : null;
 //isset($acronym) or die('Check: You must login to edit.');
 
 
+$acronym = isset($_SESSION['user']) ? $_SESSION['user']->acronym : null;
+//dumpa($acronym);
+if($acronym) {
+  $output = "Du är inloggad som: $acronym ({$_SESSION['user']->name})";
+  $way = TRUE;
+}
+else {
+  $output = "Du är INTE inloggad.";
+  $way = FALSE;
+}
+//echo $output;
+//echo "<br> way:  " . $way;
 
+
+$bwix['title'] = "Skapa ny film";
+if(!$way) {
+        //echo "NOPE";
+    $tr = "<h3> Du är inte inloggad. Logga in till databasen.<h3>";
+    $bwix['main'] = <<<EOD
+<h1>{$bwix['title']}</h1>
+{$tr}
+
+
+EOD;
+    
+}
+ else {
+    
+ 
 // Check if form was submitted
 if($create) {
-     echo "<br>Insert--------------<br>"; 
+   //  echo "<br>Insert--------------<br>"; 
+    // $bwix['title'] = "PRUTTAR";
  $sql = "INSERT INTO Movie (title) VALUES (?);";
-  echo "<br>Insert--------------<br>";
+  //echo "<br>Insert--------------<br>";
   $db->ExecuteQuery($sql, array($title));
   $db->SaveDebug();
   header('Location: movie_edit.php?id=' . $db->LastInsertId());
   exit;
 }
+ 
 
 
+if(isset($_SESSION['logge'])) {
+  $log = $_SESSION['logge'];
+ // echo "logge old";
+}
+else {
+	$log = new CUser();
+  $_SESSION['logge'] = $log;
+  //echo "loggenew";
+}
 
+//Check of logged in
+$pluppas = $log->CheckLoggedIn($bwix['database']);
+//echo $pluppas;
 // Do it and store it all in variables in the Anax container.
-$bwix['title'] = "Skapa ny film";
+
 
 $sqlDebug = $db->Dump();
+
 //$create = TRUE;
 $bwix['main'] = <<<EOD
 <h1>{$bwix['title']}</h1>
-
+<h3>{$pluppas}</h3>
 <form method=post>
   <fieldset>
   <legend>Skapa ny film</legend>
@@ -115,7 +167,8 @@ $bwix['main'] = <<<EOD
 </form>
 
 EOD;
-
+ }
+ 
 
 
 // Finally, leave it all to the rendering phase of Anax.

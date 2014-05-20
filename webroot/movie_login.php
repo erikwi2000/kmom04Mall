@@ -7,79 +7,29 @@
 include(__DIR__.'/config.php'); 
 
 session_name(preg_replace('/[:\.\/-_]/', '', __DIR__));
-session_start();
-
+if (!isset($_SESSION)) { session_start(); }
 // Do it and store it all in variables in the BWi container.
-$bwix['title'] = "Flimmer";
-
-// Do it and store it all in variables in the BWi container.
-//$bwix['title'] = "Pflimmer";
-//echo getCurrentUrl();
-
-if(isset($_SESSION['filmhandle'])) {
-  $handle = $_SESSION['filmhandle'];
-}
-else {
-	$handle = new CFilmHandle();
-  $_SESSION['filmhandle'] = $handle;
-}
-
-
-$db = new CDatabase($bwix['database']);
-
-$acronym = isset($_SESSION['user']) ? $_SESSION['user']->acronym : null;
-//dumpa($acronym);
-if($acronym) {
-  $output = "Du är inloggad som: $acronym ({$_SESSION['user']->name})";
-}
-else {
-  $output = "Du är INTE inloggad.";
-}
-
-// Check if user and password is okey
-if(isset($_POST['login'])) {
-echo "Inside Logon";
-  $sql = "SELECT acronym, name FROM User WHERE acronym = ? AND password = md5(concat(?, salt))";
-
-   $res = $db->ExecuteSelectQueryAndFetchAll($sql,array($_POST['acronym'], $_POST['password']));
-  
-	//dumpa($res);
-  if(isset($res[0])) {
-    $_SESSION['user'] = $res[0];
-  }
-  header('Location: movie_login.php');
-}
-// Do it and store it all in variables in the Anax container.
 $bwix['title'] = "Login";
 
-        
-$trxx = <<<EOD
-<h1>{$bwix['title']}</h1>
 
-<form method=post>
-  <fieldset>
-  <legend>Login</legend>
-  <p><em>Du kan logga in med doe:doe eller admin:admin.</em></p>
-  <p><label>Användare:<br/><input type='text' name='acronym' value=''/></label></p>
-  <p><label>Lösenord:<br/><input type='text' name='password' value=''/></label></p>
-  <p><input type='submit' name='login' value='Login'/></p>
-  <p><a href='movie_logout.php'>Logout</a></p>
-  <output><b>{$output}</b></output>
-  </fieldset>
-</form>
-
-EOD;
+if(isset($_SESSION['logge'])) {
+  $log = $_SESSION['logge'];
+  //echo "logge old";
+}
+else {
+	$log = new CUser();
+  $_SESSION['logge'] = $log;
+  //echo "logge new";
+}
 
 
-
-
+$fromdb = $log->GetDBaseLogin($bwix['database']);
+//echo "GetDBaseLogin04<br>";
+ 
 $bwix['main'] = <<<EOD
-{$trxx}
+{$fromdb}
 {$bwix['byline']}
 </article>
 EOD;
 
-
-// Finally, leave it all to the rendering phase of BWi.
-//echo BWI_THEME_PATH;
 include(BWI_THEME_PATH);

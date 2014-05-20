@@ -6,7 +6,8 @@
 // Include the essential config-file which also creates the $bwix 
 //variable with its defaults.
 include(__DIR__.'/config.php'); 
-
+session_name(preg_replace('/[:\.\/-_]/', '', __DIR__));
+if (!isset($_SESSION)) { session_start(); }
 // Do it and store it all in variables in the BWi container.
 $bwix['title'] = "Flimmer";
 
@@ -174,7 +175,7 @@ else {
   $_SESSION['CDatabase'] = $db;
 }
 
-
+$db = new CDatabase($bwix['database']);
 // Get parameters 
 $title    = isset($_GET['title']) ? $_GET['title'] : null;
 $genre    = isset($_GET['genre']) ? $_GET['genre'] : null;
@@ -268,7 +269,7 @@ $tr = "<tr><th>Rad</th><th>Id " . orderby('id') . "</th><th>Bild</th><th>Titel "
 foreach($res AS $key => $val) {
   $tr .= "<tr><td>{$key}</td><td>{$val->id}</td><td><img width='80' height='40' "
   . "src='{$val->image}' alt='{$val->title}' /></td><td>{$val->title}</td>"
-  . "<td>{$val->YEAR}</td><td>{$val->genre}</td></tr>";
+  . "<td>{$val->year}</td><td>{$val->genre}</td></tr>";
 }
 
 
@@ -297,8 +298,24 @@ $sqlDebug = $db->Dump();
 
 //$anax['main'] 
 
+if(isset($_SESSION['logge'])) {
+  $log = $_SESSION['logge'];
+ // echo "logge old";
+}
+else {
+	$log = new CUser();
+  $_SESSION['logge'] = $log;
+  //echo "loggenew";
+}
+$pluppas = $log->CheckLoggedIn($bwix['database']);
+
+//echo $pluppas;
+
+
+
 $trxx = <<<EOD
 <h1>{$bwix['title']}</h1>
+<h3>{$pluppas}</h3>
 
 <form>
   <fieldset>

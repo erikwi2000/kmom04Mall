@@ -6,7 +6,8 @@
 
 //variable with its defaults.
 include(__DIR__.'/config.php'); 
-
+session_name(preg_replace('/[:\.\/-_]/', '', __DIR__));
+if (!isset($_SESSION)) { session_start(); }
 // Do it and store it all in variables in the BWi container.
 $bwix['title'] = "PFlimmer";
 
@@ -46,7 +47,7 @@ $tr = "<tr><th>Rad</th><th>Id</th><th>Bild</th><th>Titel</th><th>År</th><th>Gen
 foreach($res AS $key => $val) {
   $tr .= "<tr><td>{$key}</td><td>{$val->id}</td><td><img width='80' height='40'"
   . " src='{$val->image}' alt='{$val->title}' /></td>"
-  . "<td>{$val->title}</td><td>{$val->YEAR}</td><td>{$val->genre}</td></tr>";
+  . "<td>{$val->title}</td><td>{$val->year}</td><td>{$val->genre}</td></tr>";
 }
 
 

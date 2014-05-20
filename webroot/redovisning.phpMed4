@@ -44,16 +44,13 @@ $bwix['paths3'] .= '<p>me-sida:<a href="' . $mepath . '">me-sidan</a>';
 $bwix['paths3'] .= '<p>bwix:<a href="' . $mepath . "/../hello.php" . '">bwix-sidan</a>';
 $bwix['paths3'] .= '<p>github: <a href="https://github.com/erikwi2000/kmom03Mall">github</a>';
 
-$bwix['filepath01'] = '<ul>FILER<li><p><a href="' . $mepath . "/../../files/kmom03_bild.png" .'">ER-diagram</a></li>';
-$bwix['filepath01'] .= '<li><p><a href="' . $mepath . "/../../files/ssql.sql" .'">SQL-kod</a></li>';
-$bwix['filepath01'] .= '<li><p><a href="' . $mepath . "/../../files/modell.pdf" .'">ER-diagram</a></li></ul>';
-
 // Fixa länkarna både statiska och dynamiska kmom02
 $bwix['paths4'] = '<p>me-sida:<a href="http://www.student.bth.se/~bjvi13/oophp/kmom04/kmom04Mall/webroot/me.php">me-sidan</a>';
 $bwix['paths4'] .= '<p>bwix: <a href="http://www.student.bth.se/~bjvi13/oophp/kmom04/kmom04Mall/webroot/hello.php">bwix-sidan</a>' ;
 $bwix['paths4'] .= '<p>me-sida:<a href="' . $mepath . '">me-sidan</a>';
 $bwix['paths4'] .= '<p>bwix:<a href="' . $mepath . "/../hello.php" . '">bwix-sidan</a>';
 $bwix['paths4'] .= '<p>github: <a href="https://github.com/erikwi2000/kmom04Mall">github</a>';
+
 
 $bwix['main'] = <<<EOD
 <article class="readable">
@@ -137,9 +134,7 @@ koden validerat "där uppe".
 {$bwix['paths2']} 
 <h2>Kmom03: SQL och databasen MySQL</h2>
 
-
-<h3>Har gått igenom de olika momenten:</h3>
-
+<h3>Gått igenom:</h3>
 <ol>
 <li>Kom igång med databasen MySQL och dess klienter</li>
 <li>BTH's labbmiljö för databasen MySQL</li>
@@ -147,51 +142,36 @@ koden validerat "där uppe".
 
 </ol>
 
-<p>Har bara hört talas om databaser aldrig använt eller blivit bekant med principen. 
-<br>Jaa förutom då det jag gjorde i förra kursen htmlphp där vi använde SQLite ihop med php. 
-<p>Sedan har jag ju hört och sett en mängd "buzz" om databaser och relationsdatabaser därför är det ganska roligt att se att det:
-<ul>
-<li>dels är något annat än jag föreställde mig</li>
-<li>dels är logiskt MEN kräver för mer avancerade uppgifter ganska god insikt i manualen.</li>
+Har bara hört talas om databaser aldrig använt eller blivit bekant med principen.
+    
+  <h3> Flera olika verktyg:</h3>
+       <ul>
+           <li> Workbench riktigt nice, ger ibland begripliga tips för rättning av fel,
+            <li> PHPMyAdmin har jag kört men int använt så mycket.
+<li> Kört Command line också men inte så mycket.
+<li> Har mest kört lokalt, det var vissa begränsningar såväl som viss instabilitet i uppkopplingen (putty)
+<li> SQL-övningen moment 3 var riktigt rolig. Det blev svårare på slutet men mycket information fanns ju med i kompendiet.
 </ul>
-<p>BTH's labbmiljö för databasen MySQL är ganska mångfacetterad, minst sagt. 
-<p>Tre verktyg lokalt och tre verktyg på server. 
-<br>Som "vanligt" så är det kommandostyrda verktygen oftast bra för detaljer medan de mer "avancerade" ger en bättre överblick.
-<br>Lokal exekvering är för mig mer kontrollerbar och är lättare att "komma åt". 
-<p>Jag har svårare att se vad som händer på serversidan på BTH.
-<h4>Har använt de olika verktygen:</h4>
-<ul>
-<li>MtSQL Workbench är riktigt nice, ger ibland till och med begripliga tips för rättning av fel,</li>
-<li>PHPMyAdmin har jag kört men inte använt så mycket.</li>
-<li>Kört Command line också men inte så mycket.</li>
-</ul>
-<p>Har mest kört lokalt, det var vissa begränsningar såväl som viss instabilitet i uppkopplingen just för PuTTY.
-PuTTY stängs av intermittent eventuellt kopplat till inaktivitet..
-<p>Lösenordshanteringen till MySQL på servern känns lite "klumpig". 
-<p>Jag hittade i alla fall inget sätt att skapa mitt egna lösenord (ändring från det genererade alltså)
-utan sparade det email som jag fått som kvittens. 
-Gick sedan tillbaka till detta för passord till inloggning. 
-<br>Nu var det dessutom lite problem med  av anslutningarna tog detta i forumet:
-<br><a href="http://dbwebb.se/forum/viewtopic.php?f=37&t=2161&p=18393#p18393"> Här är tråden</a>
-<p>SQL-övningen moment 3 var riktigt rolig. 
-Det blev svårare på slutet men mycket information fanns ju med i kompendiet.
-Mycket information, men logiskt, blir dock komplicerat i slutat av kursmomentet. 
-<br>MEN det ser väldigt kraftfullt ut tack vara att verktyget "plockar fram" 
-alla kopplingar mellan olika data på ett konsistent sätt. 
-<br>Att spara olika MySQL kodbitar verkar ett riktigt bra tips. 
-<br>Jag antar att när man gör databaser "på riktigt" så lagrar man MySQL koden för databasen för backup etc.
-<p>Momentet som helhet fungerar bra. <br>Just de olika uppkopplingarna kan dock gärna vara mer precisa i beskrivningarna samt seamless så att inte tid ägnas åt "onödiga" saker. 
 
-<br>PS: Har minskat kod i pagecontroller ännu mer. DS
+   
+   
+   Mycket information, men logiskt, blir dock komplicerat i slutat av
+kursmomentet.
 
+MEN det ser väldigt kraftfullt ut tack vara att verktyget "plockar fram" alla kopplingar
+mellan olika data på ett konsistent sätt.
 
+Spara olika kodbitar verkar bra. Jag antar att då man gör databaser "på riktigt" så lagrar man MySQL koden för databasen för backup etc.
 
+<p> Momentet som helhet fungerar bra. Just de olika uppkopplingarna kan gärna vara mer precisa i beskrivningarna. 
+Lösenordshanteringen till MySQL på servern känns lite "klumpig" jag hitta i alla fall
+inget sätt att skapa mitt eget lösenord utan sparade email som jag gick tillbaka till för inloggning.
+    Nu var det lite problem med an av anslutningarna tog detta i forumet:
+http://dbwebb.se/forum/viewtopic.php?f=37&amp;t=2161&amp;p=18393#p18393
 
-{$bwix['filepath01']} 
-
+<p>PS: Har minskat kod i pagecontroller ännu mer. DS
 
 {$bwix['paths3']} 
-
 <h2>Kmom04: PHP PDO och MySQL</h2>
 
 <p>Jaa ett väldigt intressant och lärande avsnitt. <p>Kanske aningen "pilligt" i vissa delar 
@@ -249,7 +229,6 @@ Men en sak ska sägas: <h4>Man lär sig himla mycket</h4> men det tar alldeles f
 </article>
 
 EOD;
-
 
 
 // Finally, leave it all to the rendering phase of BWi.

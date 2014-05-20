@@ -5,96 +5,34 @@
  */
 // Include the essential config-file which also creates the $anax variable with its defaults.
 include(__DIR__.'/config.php'); 
-
 session_name(preg_replace('/[:\.\/-_]/', '', __DIR__));
-session_start();
-
+if (!isset($_SESSION)) { session_start(); }
 // Do it and store it all in variables in the BWi container.
-$bwix['title'] = "Flimmer";
+$bwix['title'] = "Login";
 
-// Do it and store it all in variables in the BWi container.
-//$bwix['title'] = "Pflimmer";
-//echo getCurrentUrl();
-
-if(isset($_SESSION['filmhandle'])) {
-  $handle = $_SESSION['filmhandle'];
+if(isset($_SESSION['logge'])) {
+  $log = $_SESSION['logge'];
+  //echo "logge old";
 }
 else {
-	$handle = new CFilmHandle();
-  $_SESSION['filmhandle'] = $handle;
-}
-//session_name(preg_replace('/[:\.\/-_]/', '', __DIR__));
-//session_start();
-//dumpa($bwix['database']);
-$dsn      = 'mysql:host=localhost;dbname=Movie;';
-$login    = 'bjvi13';
-$password = '';
-$options  = array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'");
-
-
-try {
-  $pdo = new PDO($dsn, $login, $password, $options);
- //	  $pdo = new PDO($hej['dsn'], $hej['username'], $hej['password'], $hej['driver_options']);	
-
-//$fromdb = $handle->GetDBaseLogout($bwix['database']);
-	
-}
-catch(Exception $e) {
-  //throw $e; // For debug purpose, shows all connection details
-  throw new PDOException('Could not connect to database, hiding connection details.'); // Hide connection details.
+	$log = new CUser();
+  $_SESSION['logge'] = $log;
+  //echo "logge new";
 }
 
-$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-
-
-// Get incoming parameters
-$acronym = isset($_SESSION['user']) ? $_SESSION['user']->acronym : null;
-
-if($acronym) {
-  $output = "Du är inloggad som: $acronym ({$_SESSION['user']->name})";
-}
-else {
-  $output = "Du är INTE inloggad.";
-}
-
-// Logout the user
-if(isset($_POST['logout'])) {
-  unset($_SESSION['user']);
-  header('Location: movie_logout.php');
-}
-
-//-----------------
-
+/*
 // Do it and store it all in variables in the Anax container.
-$bwix['title'] = "Logout";
-
-$trxx = <<<EOD
-<h1>{$bwix['title']}</h1>
-
-<form method=post>
-  <fieldset>
-  <legend>Login</legend>
-  <p><input type='submit' name='logout' value='Logout'/></p>
-  <p><a href='movie_login.php'>Login</a></p>
-  <output><b>{$output}</b></output>
-  </fieldset>
-</form>
-
-EOD;
-//---------------
-
-//dumpa($trxx);
-//return $trxx;
-
-//dumpa($fromdb);
-//-----------------------
-
-//{$fromdb}
+//$bwix['title'] = "Logout";
+$_SESSION['logge']->pricken = 171717;
+//echo $_SESSION['logge']->pricken;
+echo $_SESSION['logge']->pricken . " pricken  In movie_logout <br>";
+*/
 //-----------------------------------
 
+$fromdb = $log->GetDBaseLogout($bwix['database']);
 
 $bwix['main'] = <<<EOD
-{$trxx}
+{$fromdb}
 {$bwix['byline']}
 </article>
 EOD;

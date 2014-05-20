@@ -7,8 +7,7 @@
 include(__DIR__.'/config.php'); 
 
 session_name(preg_replace('/[:\.\/-_]/', '', __DIR__));
-session_start();
-
+if (!isset($_SESSION)) { session_start(); }
 // Do it and store it all in variables in the BWi container.
 $bwix['title'] = "Flimmer";
 

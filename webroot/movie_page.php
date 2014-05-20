@@ -8,7 +8,8 @@ include(__DIR__.'/config.php');
 
 // Do it and store it all in variables in the BWi container.
 $bwix['title'] = "PFlimmer";
-
+session_name(preg_replace('/[:\.\/-_]/', '', __DIR__));
+if (!isset($_SESSION)) { session_start(); }
 
 if(isset($_SESSION['filmhandle'])) {
   $handle = $_SESSION['filmhandle'];
@@ -92,7 +93,6 @@ is_numeric($page) or die('Check: Page must be numeric.');
 //===========================================
 // Get max pages from table, for navigation
 $sql = "SELECT COUNT(id) AS rows FROM VMovie";
-
 $res = $db->ExecuteSelectQueryAndFetchAll($sql);
 
 // Get maximal pages
@@ -110,7 +110,7 @@ $tr = "<tr><th>Rad</th><th>Id</th><th>Bild</th><th>Titel</th><th>År</th><th>Gen
 foreach($res AS $key => $val) {
   $tr .= "<tr><td>{$key}</td><td>{$val->id}</td><td><img width='80' height='40' "
   . "src='{$val->image}' alt='{$val->title}' /></td><td>{$val->title}</td>"
-  . "<td>{$val->YEAR}</td><td>{$val->genre}</td></tr>";
+  . "<td>{$val->year}</td><td>{$val->genre}</td></tr>";
 }
 
 

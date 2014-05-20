@@ -1,17 +1,20 @@
-movieCREATE DATABASE IF NOT EXISTS Movie;
+CREATE DATABASE IF NOT EXISTS Movie;
  
-USE Movie;
+USE bjvi13;
  --
 -- Create table for my own movie database
 --
-DROP TABLE IF EXISTS Movie2;
-CREATE TABLE Movie2
+
+DROP TABLE IF EXISTS knatte;
+DROP TABLE IF EXISTS kajsaanka;
+DROP TABLE IF EXISTS Movie;
+CREATE TABLE Movie
 (
   id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
   title VARCHAR(100) NOT NULL,
   director VARCHAR(100),
   LENGTH INT DEFAULT NULL, -- Length in minutes
-  YEAR INT NOT NULL DEFAULT 1900,
+  year INT NOT NULL DEFAULT 1900,
   plot TEXT, -- Short intro to the movie
   image VARCHAR(100) DEFAULT NULL, -- Link to an image
   subtext CHAR(3) DEFAULT NULL, -- swe, fin, en, etc
@@ -24,9 +27,9 @@ CREATE TABLE Movie2
 SHOW CHARACTER SET;
 SHOW COLLATION LIKE 'utf8%';
  
-DELETE FROM Movie2;
+**DELETE FROM Movie;
  
-INSERT INTO Movie (title, YEAR, image) VALUES
+INSERT INTO Movie (title, year, image) VALUES
   ('Pulp fiction', 1994, 'img/movie/pulp-fiction.jpg'),
   ('American Pie', 1999, 'img/movie/american-pie.jpg'),
   ('Pokémon The Movie 2000', 1999, 'img/movie/pokemon.jpg'),  
@@ -47,6 +50,7 @@ SELECT * FROM Movie;
         ON M2G.idGenre = G.id
         WHERE G.name = ?
     ;
+
   SELECT DISTINCT G.name
   FROM Genre AS G
     INNER JOIN Movie2Genre AS M2G
@@ -67,7 +71,8 @@ INSERT INTO Genre (name) VALUES
   ('comedy'), ('romance'), ('college'), 
   ('crime'), ('drama'), ('thriller'), 
   ('animation'), ('adventure'), ('family'), 
-  ('svenskt'), ('action'), ('horror')
+  ('svenskt'), ('action'), ('horror'),
+  ('spanskt'), ('staction'), ('morrhor')
 ;
  
 DROP TABLE IF EXISTS Movie2Genre;
@@ -102,9 +107,9 @@ INSERT INTO Movie2Genre (idMovie, idGenre) VALUES
   (5, 12),
     (6, 3),
 	  (6, 5),
-	    (6, 7),
-		  (7, 4),
-		    (7, 6)
+	    (6, 13),
+		  (7, 14),
+		    (7, 15)
 ;
  
 
@@ -200,7 +205,7 @@ UPDATE User SET password = md5(concat('doe', salt)) WHERE acronym = 'doe';
 SELECT * FROM VMovie;
 SELECT * FROM  Movie2Genre;
 SELECT * FROM Movie;
-INSERT INTO Movie (title, YEAR, image) VALUES
+INSERT INTO Movie (title, year, image) VALUES
   ('Pulp xxxxx', 1994, 'img/movie/pulp-fiction.jpg'),
   ('PieDie', 1999, 'img/movie/american-pie.jpg'),
   ('Pokévie 2000', 1999, 'img/movie/pokemon.jpg'),  
@@ -208,7 +213,7 @@ INSERT INTO Movie (title, YEAR, image) VALUES
   ('From Disk Till Tvätt', 1996, 'img/movie/from-dusk-till-dawn.jpg')
 ;
 
-INSERT INTO Movie (title, YEAR, image) VALUES
+INSERT INTO Movie (title, year, image) VALUES
   ('Pu xxxxx', 1994, 'img/movie/six.jpg')
 ;
 

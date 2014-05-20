@@ -11,7 +11,15 @@
  *
  */
 // Include the essential config-file which also creates the $anax variable with its defaults.
-include(__DIR__.'/config.php'); 
+include(__DIR__ . '/config.php'); 
+
+if(isset($_SESSION['filmhandle'])) {
+  $handle = $_SESSION['filmhandle'];
+}
+else {
+	$handle = new CFilmHandle();
+  $_SESSION['filmhandle'] = $handle;
+}
 
 $bwix['stylesheets'][] = '//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css';
 $bwix['inlinestyle'] = "
@@ -98,6 +106,7 @@ function getPageNavigation($hits, $page, $max, $min=1) {
 
   $nav .= "<a href='" . getQueryString(array('page' => ($page < $max ? $page + 1 : $max) )) . "'>&gt;</a> ";
   $nav .= "<a href='" . getQueryString(array('page' => $max)) . "'>&gt;&gt;</a> ";
+  echo $nav;
   return $nav;
 }
 
@@ -112,7 +121,7 @@ $pdo = new PDO($dsn, $login, $password, $options);
 $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 */
 $db = new CDatabase($bwix['database']);
-
+$_SESSION['cdatabase'] = $db;
 
 // Get parameters 
 $hits  = isset($_GET['hits']) ? $_GET['hits'] : 10;
@@ -152,15 +161,22 @@ $res = $db->ExecuteSelectQueryAndFetchAll($sql);
 // Put results into a HTML-table
 $tr = "<tr><th>Rad</th><th>Id</th><th>Bild</th><th>Titel</th><th>År</th><th>Genre</th></tr>";
 foreach($res AS $key => $val) {
-  $tr .= "<tr><td>{$key}</td><td>{$val->id}</td><td><img width='80' height='40' src='{$val->image}' alt='{$val->title}' /></td><td>{$val->title}</td><td>{$val->year}</td><td>{$val->genre}</td></tr>";
+  $tr .= "<tr><td>{$key}</td><td>{$val->id}</td><td><img width='80' height='40' "
+  . "src='{$val->image}' alt='{$val->title}' /></td><td>{$val->title}</td>"
+  . "<td>{$val->year}</td><td>{$val->genre}</td></tr>";
 }
 
 
 // Do it and store it all in variables in the Anax container.
-$anax['title'] = "Visa filmer med sökalternativ";
-
+$bwix['title'] = "Visa filmer med sökalternativ";
+echo "-----------------<br>";
 $hitsPerPage = getHitsPerPage(array(2, 4, 8));
+echo "-----------------<br>";
+dumpa($hitsPerPage);
 $navigatePage = getPageNavigation($hits, $page, $max);
+
+echo "-----------------<br>";
+dumpa($navigatePage);
 $sqlDebug = $db->Dump();
 
 $bwix['main'] = <<<EOD

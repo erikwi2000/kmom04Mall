@@ -9,6 +9,24 @@ include(__DIR__.'/config.php');
 // Do it and store it all in variables in the BWi container.
 $bwix['title'] = "Flimmer";
 
+session_name(preg_replace('/[:\.\/-_]/', '', __DIR__));
+if (!isset($_SESSION)) { session_start(); }
+//session_start(); 
+
+// echo the session variable
+//echo 'The value of foo is '.$_SESSION['foo']; 
+
+if(isset($_SESSION['logge'])) {
+  $log = $_SESSION['logge'];
+  //echo "logge old";
+}
+else {
+	$log = new CUser();
+  $_SESSION['logge'] = $log;
+  //echo "logge new";
+}
+
+
 
 if(isset($_SESSION['filmhandle'])) {
   $handle = $_SESSION['filmhandle'];
@@ -20,12 +38,18 @@ else {
 
 $db = new CDatabase($bwix['database']);
 
+  // $action =  isset($_SESSION['user']) ? TRUE : FALSE;
+   //if($action){echo "wwwwwwwweeeeeeeeeeeerrrr";}
+   
+   
 $bwix['inlinestyle'] = "
 .orderby a {
   text-decoration: none;
   color: black;
 }
 ";
+$pluppas = $log->CheckLoggedIn($bwix['database']);
+
 
 // Get parameters for sorting
 $orderby  = isset($_GET['orderby']) ? strtolower($_GET['orderby']) : 'id';
@@ -54,15 +78,17 @@ $tr = "<tr><th>Rad</th><th>Id " . orderby('id') . "</th><th>Bild</th><th>Titel "
 foreach($res AS $key => $val) {
   $tr .= "<tr><td>{$key}</td><td>{$val->id}</td><td><img width='80' height='40'"
   . " src='{$val->image}' alt='{$val->title}' /></td><td>{$val->title}</td>"
-  . "<td>{$val->YEAR}</td><td>{$val->genre}</td></tr>";
+  . "<td>{$val->year}</td><td>{$val->genre}</td></tr>";
 }
 
 // Do it and store it all in variables in the Anax container.
-$bwix['title'] = "Sortera tabellens innehåll";
+$bwix['title'] = "<h1>Sortera tabellens innehåll</h1>";
 
+//if(!$action){$bwix['title'] .= "<h3> Du är inte inloggad.</h3>";}
         
 $bwix['main'] = <<<EOD
-<h1>{$bwix['title']}</h1>
+{$bwix['title']}
+{$pluppas}
 <p>Resultatet från SQL-frågan:</p>
 <p><code>{$sql}</code></p>
 <table>

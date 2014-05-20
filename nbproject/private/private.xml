@@ -3,15 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/oophp/kmom04/kmom04Mall/webroot/movie_create.php</file>
+            <file>file:/C:/xampp/htdocs/oophp/kmom04/kmom04Mall/webroot/movie_view_delete.php</file>
             <file>file:/C:/xampp/htdocs/oophp/kmom04/kmom04Mall/webroot/pflimmer.php</file>
-            <file>file:/C:/xampp/htdocs/oophp/kmom04/kmom04Mall/webroot/movie_edit.php</file>
+            <file>file:/C:/xampp/htdocs/oophp/kmom04/kmom04Mall/src/CDatabase/CDatabase.phpORIG</file>
+            <file>file:/C:/xampp/htdocs/oophp/kmom04/kmom04Mall/webroot/pflimmerBorta.php</file>
             <file>file:/C:/xampp/htdocs/oophp/kmom04/kmom04Mall/src/CDatabase/CDatabase.php</file>
+            <file>file:/C:/xampp/htdocs/oophp/kmom04/kmom04Mall/src/CDatabase/CDatabaseBorta.php</file>
             <file>file:/C:/xampp/htdocs/oophp/kmom04/kmom04Mall/webroot/movie_connect.php</file>
+            <file>file:/C:/xampp/htdocs/oophp/kmom04/kmom04Mall/webroot/movie_delete.php</file>
+            <file>file:/C:/xampp/htdocs/oophp/kmom04/kmom04Mall/webroot/movie_page.php</file>
+            <file>file:/C:/xampp/htdocs/oophp/kmom04/kmom04Mall/webroot/movie_logout.php</file>
+            <file>file:/C:/xampp/htdocs/oophp/kmom04/kmom04Mall/webroot/movie_sort.php</file>
+            <file>file:/C:/xampp/htdocs/oophp/kmom04/kmom04Mall/webroot/configBorta.php</file>
+            <file>file:/C:/xampp/htdocs/oophp/kmom04/kmom04Mall/src/CUser/CUser.php</file>
+            <file>file:/C:/xampp/htdocs/oophp/kmom04/kmom04Mall/webroot/movie_reset.php</file>
             <file>file:/C:/xampp/htdocs/oophp/kmom04/kmom04Mall/webroot/movie_login.php</file>
-            <file>file:/C:/xampp/htdocs/oophp/kmom04/kmom04Mall/webroot/config.php</file>
-            <file>file:/C:/xampp/htdocs/oophp/kmom04/kmom04Mall/src/CFilmHandle/CFilmHandle.php</file>
-            <file>file:/C:/xampp/htdocs/oophp/kmom04/kmom04Mall/webroot/movie_view.php</file>
         </group>
     </open-files>
 </project-private>

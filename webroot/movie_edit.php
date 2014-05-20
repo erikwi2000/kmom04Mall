@@ -5,7 +5,8 @@
  */
 // Include the essential config-file which also creates the $anax variable with its defaults.
 include(__DIR__.'/config.php'); 
-
+session_name(preg_replace('/[:\.\/-_]/', '', __DIR__));
+if (!isset($_SESSION)) { session_start(); }
 if(isset($_SESSION['filmhandle'])) {
   $handle = $_SESSION['filmhandle'];
 }
@@ -13,6 +14,10 @@ else {
 	$handle = new CFilmHandle();
   $_SESSION['filmhandle'] = $handle;
 }
+
+
+
+
 
 $bwix['inlinestyle'] = "
 .orderby a {
@@ -56,6 +61,20 @@ select {
 
 // Connect to a MySQL database using PHP PDO
 $db = new CDatabase($bwix['database']);
+
+$acronym = isset($_SESSION['user']) ? $_SESSION['user']->acronym : null;
+//dumpa($acronym);
+if($acronym) {
+  $output = "Du är inloggad som: $acronym ({$_SESSION['user']->name})";
+  $way = TRUE;
+}
+else {
+  $output = "Du är INTE inloggad.";
+  $way = FALSE;
+}
+//echo $output;
+//echo "<br> way:  " . $way;
+//if($way){echo "YES";} else {echo "NO";}
 
 
 // Get parameters 
@@ -105,6 +124,21 @@ else {
 }
 
 
+
+if(isset($_SESSION['logge'])) {
+  $log = $_SESSION['logge'];
+ // echo "logge old";
+}
+else {
+	$log = new CUser();
+  $_SESSION['logge'] = $log;
+  //echo "loggenew";
+}
+
+//Check of logged in
+$pluppas = $log->CheckLoggedIn($bwix['database']);
+//echo $pluppas;
+
 // Do it and store it all in variables in the Anax container.
 $bwix['title'] = "Uppdatera info om film";
 
@@ -112,7 +146,7 @@ $sqlDebug = $db->Dump();
 
 $bwix['main'] = <<<EOD
 <h1>{$bwix['title']}</h1>
-
+<h3>{$pluppas}</h3>
 <form method=post>
   <fieldset>
   <legend>Uppdatera info om film</legend>

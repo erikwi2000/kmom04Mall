@@ -14,60 +14,43 @@ error_reporting(-1);              // Report all type of errors
 ini_set('display_errors', 1);     // Display all errors 
 ini_set('output_buffering', 0);   // Do not buffer outputs, write directly
 
-
+session_name(preg_replace('/[:\.\/-_]/', '', __DIR__));
+session_start();
 /** * Define BWi paths.
  *
  */
- //echo "<br> Dir <br>" . __DIR__ . "<br>";
 define('BWI_INSTALL_PATH', __DIR__ . '/../');
-//echo "BWI install path <br>" . BWI_INSTALL_PATH . "</br>";
 define('BWI_THEME_PATH', BWI_INSTALL_PATH . 'theme/render.php');
-//echo  "BWI theme path <br>" . BWI_THEME_PATH . "</br>";
-//	var_dump(BWI_THEME_PATH);
 //session_name(preg_replace('/[:\.\/-_]/', '', __DIR__));
 //session_start();
-
 include(BWI_INSTALL_PATH . '/src/bootstrap.php');
-//echo "<br>BWI install path <br>" .  BWI_INSTALL_PATH;
-//echo BWI_INSTALL_PATH . '/src/bootstrap.php';
-
 $bwix = array();
-
 /**
  * Settings for the database.
  *
+ * 
+ 
+ $dsn      = 'mysql:host=blu-ray.student.bth.se;dbname=Movie;';
+//$dsn      = 'mysql:host=localhost;dbname=Movie;';
+$login    = 'bjvi13';
+$password = '787xQ]i9';
+//$password = ''; 
+ 
+ * 
+ * 
  */
-/*
- *  LOCAL DATA
-$bwix['databaseHOME']['dsn']            = 'mysql:host=localhost;dbname=Movie;';
-$bwix['databaseHOME']['username']       = 'bjvi13';
-$bwix['databaseHOME']['password']       = '';
-$bwix['databaseHOME']['driver_options'] = array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'");
-*/
-/*
- * SERVER DATA
-$bwix['databaseAWAY']['dsn']            = 'mysql:host=blu-ray.student.bth.se;dbname=Movie;';
-$bwix['databaseAWAY']['username']       = 'bjvi13';
-$bwix['databaseAWAY']['password']       = '787xQ]i9';
-$bwix['databaseAWAY']['driver_options'] = array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'");
- */
-
-// INCLUDE PATHS TO db DATA
-
-include(__DIR__ . '/databaseHOME.php');
-//include(__DIR__ . '/databaseAWAY.php');
-
-
-//dumpa('database');
-
-
-
+$bwix['database']['dsn']            = 'mysql:host=blu-ray.student.bth.se;dbname=Movie;';
+//$bwix['database']['dsn']            = 'mysql:host=localhost;dbname=Movie;';
+$bwix['database']['username']       = 'bjvi13';
+//$bwix['database']['username']       = 'bjvi13';
+$bwix['database']['password']       = '787xQ]i9';
+//$bwix['database']['password']       = '';
+$bwix['database']['driver_options'] = array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'");
+ 
 $bwix['lang']         = 'sv';
 $bwix['title_append'] = ' | oophp';
 $bwix['stylesheets'] = array('css/webb.css');
 $bwix['stylesheets'] = array('css/style.css');
-
-
 //-------------------------
 $bwix['inlinestyle'] = "
 .orderby a {
@@ -160,23 +143,20 @@ $bwix['navbarFilm'] = array(
   'class' => 'nb-plain2',
 //	 'class' => 'navbar',
   'items' => array(
-    'hem'       => array('text'=>'Alla filmer',   'url'=>'movie_connect.php',        'title' => 'Alla filmer'),
+ //   'hem'       => array('text'=>'Alla filmer',   'url'=>'movie_connect.php',        'title' => 'Alla filmer'),
     'reset'     => array('text'=>'Återställ',     'url'=>'movie_reset.php',          'title' => 'Återställ'),
-      /*
-    'titel'     => array('text'=>'Sök titel',     'url'=>'movie_search_title.php',   'title' => 'Sök film per titel'),
-    'year'      => array('text'=>'Sök per år',    'url'=>'movie_search_by_year.php', 'title' => 'Sök film per år'),
-    'genre'     => array('text'=>'Sök per genre', 'url'=>'movie_by_genre.php',       'title' => 'Sök film per genre'),
-    'page'      => array('text'=>'Paginering',    'url'=>'movie_page.php',           'title' => 'Dela upp resultatet på sidor'),
-      */
-    'sort'      => array('text'=>'Sortera',       'url'=>'movie_sort.php',           'title' => 'Sortera per kolumn'),
+  //  'titel'     => array('text'=>'Sök titel',     'url'=>'movie_search_title.php',   'title' => 'Sök film per titel'),
+  //  'year'      => array('text'=>'Sök per år',    'url'=>'movie_search_by_year.php', 'title' => 'Sök film per år'),
+  //  'genre'     => array('text'=>'Sök per genre', 'url'=>'movie_by_genre.php',       'title' => 'Sök film per genre'),
+  //  'sort'      => array('text'=>'Sortera',       'url'=>'movie_sort.php',           'title' => 'Sortera per kolumn'),
+  //  'page'      => array('text'=>'Paginering',    'url'=>'movie_page.php',           'title' => 'Dela upp resultatet på sidor'),
     'login'     => array('text'=>'Login',         'url'=>'movie_login.php',          'title' => 'Logga in för att ändra i databasen'),
     'logout'    => array('text'=>'Logout',        'url'=>'movie_logout.php',         'title' => 'Logga ut'),
     'edit'      => array('text'=>'Uppdatera',     'url'=>'movie_view_edit.php',      'title' => 'Uppdatera info om film'),
     'create'    => array('text'=>'Skapa',         'url'=>'movie_create.php',         'title' => 'Skapa ny film'),
     'delete'    => array('text'=>'Radera',        'url'=>'movie_view_delete.php',    'title' => 'Radera film'),
     'view'      => array('text'=>'Visa_komplett', 'url'=>'movie_view.php',           'title' => 'Kombinerat sökalternativ på en sida'),
-  //  'stats'     => array('text'=>'Stats',         'url'=>'movie_cdatabase.php',      'title' => 'Statistik'),
-    'kallkod'   => array('text'=>'Källkod',       'url'=>'source.php',               'title' => 'Se källkoden'),
+    'kallkod'   => array('text'=>'Källkod',     'url'=>'source.php',      'title' => 'Se källkoden'),
   ),
   'callback_selected' => function($url) {
     if(basename($_SERVER['SCRIPT_FILENAME']) == $url) {

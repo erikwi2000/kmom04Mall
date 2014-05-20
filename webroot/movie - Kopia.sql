@@ -1,10 +1,10 @@
-CREATE DATABASE IF NOT EXISTS Movie;
+movieCREATE DATABASE IF NOT EXISTS Movie;
  
 USE Movie;
  --
 -- Create table for my own movie database
 --
-DROP TABLE IF EXISTS Movie2;
+
 CREATE TABLE Movie2
 (
   id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
@@ -33,7 +33,10 @@ INSERT INTO Movie (title, year, image) VALUES
   ('Kopps', 2003, 'img/movie/kopps.jpg'),
   ('From Dusk Till Dawn', 1996, 'img/movie/from-dusk-till-dawn.jpg'),
     ('Knopp och trolls', 2013, 'img/movie/six.jpg'),
-	    ('Kopp, kopp en kaffe film', 2011, 'img/movie/seven.jpg')
+	  ('Kopps', 2003, 'img/movie/kopps.jpg'),
+  ('From Husk Till Prawn', 1996, 'img/movie/eight.jpg'),
+    ('Knopp och trolls', 2014, 'img/movie/six.jpg'),
+	    ('Kopp, kopp en kaffeLatte film', 1957, 'img/movie/seven.jpg')
 ;
  
 SELECT * FROM Movie;
@@ -49,10 +52,10 @@ SELECT * FROM Movie;
     ;
   SELECT DISTINCT G.name
   FROM Genre AS G
-    INNER JOIN Movie2Genre AS M2G
+    INNER JOIN Movie22Genre AS M2G
       ON G.id = M2G.idGenre;
 
-USE Movie;
+USE Movie2;
 --
 -- Add tables for genre
 --
@@ -63,29 +66,31 @@ CREATE TABLE Genre
   name CHAR(20) NOT NULL -- crime, svenskt, college, drama, etc
 ) ENGINE INNODB CHARACTER SET utf8;
  
-INSERT INTO Genre (name) VALUES 
+INSERT INTO Genre2 (name) VALUES 
   ('comedy'), ('romance'), ('college'), 
   ('crime'), ('drama'), ('thriller'), 
   ('animation'), ('adventure'), ('family'), 
+  ('assimilation'), ('apecatching'), ('furioos'), 
   ('svenskt'), ('action'), ('horror')
 ;
  
 DROP TABLE IF EXISTS Movie2Genre;
 CREATE TABLE Movie2Genre
 (
-  idMovie INT NOT NULL,
-  idGenre INT NOT NULL,
+  idMovie2 INT NOT NULL,
+  idGenre2 INT NOT NULL,
  
-  FOREIGN KEY (idMovie) REFERENCES Movie (id),
-  FOREIGN KEY (idGenre) REFERENCES Genre (id),
+  FOREIGN KEY (idMovie2) REFERENCES Movie2 (id),
+  FOREIGN KEY (idGenre2) REFERENCES Genre2 (id),
  
-  PRIMARY KEY (idMovie, idGenre)
+  PRIMARY KEY (idMovie2, idGenre2)
 ) ENGINE INNODB;
  
  
-INSERT INTO Movie2Genre (idMovie, idGenre) VALUES
-  (1, 7),
-  (1, 9),
+INSERT INTO Movie2Genre (idMovie2, idGenre2) VALUES
+  (1, 1),
+  (1, 5),
+  (1, 6),
   (2, 1),
   (2, 2),
   (2, 3),
@@ -101,9 +106,21 @@ INSERT INTO Movie2Genre (idMovie, idGenre) VALUES
   (5, 12),
     (6, 3),
 	  (6, 5),
+		  (7, 7), 
+  (7, 8), 
+  (7, 9), 
+  (8, 11),
+  (8, 1),
+  (8, 10),
+  (8, 9),
+  (9, 11),
+  (9, 4),
+  (10, 12),
+    (6, 15),
+	  (6, 14),
 	    (6, 7),
-		  (7, 4),
-		    (7, 6)
+		  (7, 13),
+		    (7, 11)
 ;
  
 
@@ -114,12 +131,12 @@ CREATE VIEW VMovie
 AS
 SELECT 
   M.*,
-  GROUP_CONCAT(G.name) AS genre
-FROM Movie AS M
+  GROUP_CONCAT(G.name) AS genre2
+FROM Movie2 AS M
   LEFT OUTER JOIN Movie2Genre AS M2G
-    ON M.id = M2G.idMovie
-  LEFT OUTER JOIN Genre AS G
-    ON M2G.idGenre = G.id
+    ON M.id = M2G.idMovie2
+  LEFT OUTER JOIN Genre2 AS G
+    ON M2G.idGenre2 = G.id
 GROUP BY M.id
 ;
  
@@ -208,21 +225,16 @@ INSERT INTO Movie (title, year, image) VALUES
 ;
 
 INSERT INTO Movie (title, year, image) VALUES
-  ('Pu xxxxx', 1994, 'img/movie/six.jpg'),
-  ('xxxxx', 1994, 'img/movie/eight.jpg'),
-  ('gröten', 1994, 'img/movie/seven.jpg')
+  ('Pu xxxxx', 1994, 'img/movie/six.jpg')
 ;
-use movie;
 
 INSERT INTO Movie2Genre (idMovie, idGenre) VALUES
+
     (6, 3),
 	  (6, 5),
 	    (6, 7),
 		  (7, 4),
 		    (7, 6)
 ;
-use Movie2Genre;
 
-SELECT * FROM VMovie ;
-
-
+SELECT * FROM Movie ;

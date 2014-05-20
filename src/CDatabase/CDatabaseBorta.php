@@ -30,38 +30,46 @@ class CDatabase {
       'driver_options' => null,
       'fetch_style' => PDO::FETCH_OBJ,
     );
-    $this->options = array_merge($default, $options);
     
+    
+       
+$bwix['database']['dsn']            = 'mysql:host=blu-ray.student.bth.se;dbname=Movie;';
+//$bwix['database']['dsn']            = 'mysql:host=localhost;dbname=Movie;';
+$bwix['database']['username']       = 'bjvi13';
+//$bwix['database']['username']       = 'bjvi13';
+$bwix['database']['password']       = '787xQ]i9';
+//$bwix['database']['password']       = '';
+$options  = array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'");
+$pdo = new PDO($dsn, $login, $password, $options);
+$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+    
+    
+    
+    $this->options = array_merge($default, $options);
+
     try {
       $this->db = new PDO($this->options['dsn'], $this->options['username'], $this->options['password'], $this->options['driver_options']);
     }
     catch(Exception $e) {
-        //throw $e; // For debug purpose, shows all connection details  
+      //throw $e; // For debug purpose, shows all connection details
       throw new PDOException('Could not connect to database, hiding connection details.'); // Hide connection details.
-    }    
-        $this->db->SetAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, $this->options['fetch_style']); 
+    }
+  
+    $this->db->SetAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, $this->options['fetch_style']); 
  // $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-   //----------------
     
-      /*  
-        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-echo $login;
-    
+       
 $dsn      = 'mysql:host=localhost;dbname=Movie;';
 $login    = 'bjvi13';
 $password = '';
 $options  = array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'");
 $pdo = new PDO($dsn, $login, $password, $options);
-
-        
-  
-*/
-    
+$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
     
   
   //  } 
     // Get debug information from session if any.
-/*
+
     if(isset($_SESSION['CDatabase'])) {
       self::$numQueries = $_SESSION['CDatabase']['numQueries'];
       self::$queries    = $_SESSION['CDatabase']['queries'];
@@ -75,7 +83,7 @@ $pdo = new PDO($dsn, $login, $password, $options);
 	//	echo "Inside_CDatabase_construct_wwwwwwwwwwwwwwwwwww";
 	//	dumpa($default);
   
-  */
+  
   }
   /**
    * Getters

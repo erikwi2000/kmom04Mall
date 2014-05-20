@@ -1,11 +1,14 @@
 CREATE DATABASE IF NOT EXISTS Movie;
  
-USE Movie;
+USE bjvi13;
  --
 -- Create table for my own movie database
 --
-DROP TABLE IF EXISTS Movie2;
-CREATE TABLE Movie2
+
+DROP TABLE IF EXISTS knatte;
+DROP TABLE IF EXISTS kajsaanka;
+DROP TABLE IF EXISTS Movie;
+CREATE TABLE Movie
 (
   id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
   title VARCHAR(100) NOT NULL,
@@ -24,7 +27,7 @@ CREATE TABLE Movie2
 SHOW CHARACTER SET;
 SHOW COLLATION LIKE 'utf8%';
  
-DELETE FROM Movie2;
+**DELETE FROM Movie;
  
 INSERT INTO Movie (title, year, image) VALUES
   ('Pulp fiction', 1994, 'img/movie/pulp-fiction.jpg'),
@@ -47,6 +50,7 @@ SELECT * FROM Movie;
         ON M2G.idGenre = G.id
         WHERE G.name = ?
     ;
+
   SELECT DISTINCT G.name
   FROM Genre AS G
     INNER JOIN Movie2Genre AS M2G
@@ -84,8 +88,9 @@ CREATE TABLE Movie2Genre
  
  
 INSERT INTO Movie2Genre (idMovie, idGenre) VALUES
-  (1, 7),
-  (1, 9),
+  (1, 1),
+  (1, 5),
+  (1, 6),
   (2, 1),
   (2, 2),
   (2, 3),
@@ -208,21 +213,16 @@ INSERT INTO Movie (title, year, image) VALUES
 ;
 
 INSERT INTO Movie (title, year, image) VALUES
-  ('Pu xxxxx', 1994, 'img/movie/six.jpg'),
-  ('xxxxx', 1994, 'img/movie/eight.jpg'),
-  ('gröten', 1994, 'img/movie/seven.jpg')
+  ('Pu xxxxx', 1994, 'img/movie/six.jpg')
 ;
-use movie;
 
 INSERT INTO Movie2Genre (idMovie, idGenre) VALUES
+
     (6, 3),
 	  (6, 5),
 	    (6, 7),
 		  (7, 4),
 		    (7, 6)
 ;
-use Movie2Genre;
 
-SELECT * FROM VMovie ;
-
-
+SELECT * FROM Movie ;

@@ -1,11 +1,14 @@
 CREATE DATABASE IF NOT EXISTS Movie;
  
-USE Movie;
+USE bjvi13;
  --
 -- Create table for my own movie database
 --
-DROP TABLE IF EXISTS Movie2;
-CREATE TABLE Movie2
+
+DROP TABLE IF EXISTS knatte;
+DROP TABLE IF EXISTS kajsaAnka;
+DROP TABLE IF EXISTS Movie;
+CREATE TABLE Movie
 (
   id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
   title VARCHAR(100) NOT NULL,
@@ -24,7 +27,7 @@ CREATE TABLE Movie2
 SHOW CHARACTER SET;
 SHOW COLLATION LIKE 'utf8%';
  
-DELETE FROM Movie2;
+**DELETE FROM Movie;
  
 INSERT INTO Movie (title, year, image) VALUES
   ('Pulp fiction', 1994, 'img/movie/pulp-fiction.jpg'),
@@ -47,6 +50,7 @@ SELECT * FROM Movie;
         ON M2G.idGenre = G.id
         WHERE G.name = ?
     ;
+
   SELECT DISTINCT G.name
   FROM Genre AS G
     INNER JOIN Movie2Genre AS M2G
@@ -67,7 +71,8 @@ INSERT INTO Genre (name) VALUES
   ('comedy'), ('romance'), ('college'), 
   ('crime'), ('drama'), ('thriller'), 
   ('animation'), ('adventure'), ('family'), 
-  ('svenskt'), ('action'), ('horror')
+  ('svenskt'), ('action'), ('horror'),
+  ('spanskt'), ('staction'), ('morrhor')
 ;
  
 DROP TABLE IF EXISTS Movie2Genre;
@@ -84,8 +89,9 @@ CREATE TABLE Movie2Genre
  
  
 INSERT INTO Movie2Genre (idMovie, idGenre) VALUES
-  (1, 7),
-  (1, 9),
+  (1, 1),
+  (1, 5),
+  (1, 6),
   (2, 1),
   (2, 2),
   (2, 3),
@@ -101,9 +107,9 @@ INSERT INTO Movie2Genre (idMovie, idGenre) VALUES
   (5, 12),
     (6, 3),
 	  (6, 5),
-	    (6, 7),
-		  (7, 4),
-		    (7, 6)
+	    (6, 13),
+		  (7, 14),
+		    (7, 15)
 ;
  
 
@@ -125,16 +131,16 @@ GROUP BY M.id
  
 SELECT * FROM VMovie;
 use VMovie;
-USE Mivoe;
+
 USE Movie;
 
 
 --
 -- Table for user
 --
-DROP TABLE IF EXISTS USER;
+DROP TABLE IF EXISTS user;
  
-CREATE TABLE USER
+CREATE TABLE user
 (
   id INT AUTO_INCREMENT PRIMARY KEY,
   acronym CHAR(12) UNIQUE NOT NULL,
@@ -143,19 +149,23 @@ CREATE TABLE USER
   salt INT NOT NULL
 ) ENGINE INNODB CHARACTER SET utf8;
  
-INSERT INTO USER (acronym, name, salt) VALUES 
+INSERT INTO user (acronym, name, salt) VALUES 
   ('doe', 'John/Jane Doe', unix_timestamp()),
-  ('admin', 'Administrator', unix_timestamp())
+  ('admin', 'Administrator', unix_timestamp()),
+ ('bjvi13', 'Viklund', unix_timestamp())
 ;
- SELECT acronym, name FROM USER WHERE acronym = ? AND password = md5(concat(?, salt))
-UPDATE USER SET password = md5(concat('doe', salt)) WHERE acronym = 'doe';
-UPDATE USER SET password = md5(concat('admin', salt)) WHERE acronym = 'admin';
- 
-SELECT * FROM USER;
 
-SELECT acronym, name FROM USER WHERE acronym = "?"  AND password = md5(concat("?", salt));
-SELECT acronym, name FROM USER WHERE acronym = "?"  ;
-SELECT acronym, name FROM USER;
+ SELECT acronym, name FROM user WHERE acronym = ? AND password = md5(concat(?, salt));
+UPDATE user SET password = md5(concat('doe', salt)) WHERE acronym = 'doe';
+UPDATE user SET password = md5(concat('admin', salt)) WHERE acronym = 'admin';
+ UPDATE user SET password = md5(concat('bjvi13', salt)) WHERE acronym = 'bjvi13';
+
+
+SELECT * FROM user;
+
+SELECT acronym, name FROM user WHERE acronym = "?"  AND password = md5(concat("?", salt));
+SELECT acronym, name FROM user WHERE acronym = "?"  ;
+SELECT acronym, name FROM user;
 
 SELECT acronym, name FROM USER   ;
 
@@ -167,9 +177,9 @@ SELECT acronym, name FROM USER WHERE acronym LIKE '%' AND password LIKE md5(conc
 SELECT acronym, name, password, salt FROM USER WHERE acronym LIKE '%' AND password LIKE '%';
 
 
-DROP TABLE IF EXISTS USER;
+DROP TABLE IF EXISTS user;
  
-CREATE TABLE USER
+CREATE TABLE user
 (
   id INT AUTO_INCREMENT PRIMARY KEY,
   acronym CHAR(12) UNIQUE NOT NULL,
@@ -177,15 +187,6 @@ CREATE TABLE USER
   password CHAR(32),
   salt INT NOT NULL
 ) ENGINE INNODB CHARACTER SET utf8;
- 
-INSERT INTO USER (acronym, name, salt) VALUES 
-  ('doe', 'John/Jane Doe', unix_timestamp()),
-  ('admin', 'Administrator', unix_timestamp())
-;
- 
-INSERT INTO USER (acronym, name, salt) VALUES 
-  ('bjvi13', 'Administrator', unix_timestamp())
-;
 
 UPDATE USER SET password = md5(concat('doe', salt)) WHERE acronym = 'doe';
 UPDATE USER SET password = md5(concat('admin', salt)) WHERE acronym = 'admin';
@@ -199,30 +200,9 @@ UPDATE User SET password = md5(concat('doe', salt)) WHERE acronym = 'doe';
 SELECT * FROM VMovie;
 SELECT * FROM  Movie2Genre;
 SELECT * FROM Movie;
-INSERT INTO Movie (title, year, image) VALUES
-  ('Pulp xxxxx', 1994, 'img/movie/pulp-fiction.jpg'),
-  ('PieDie', 1999, 'img/movie/american-pie.jpg'),
-  ('Pokévie 2000', 1999, 'img/movie/pokemon.jpg'),  
-  ('Kropps', 2003, 'img/movie/kopps.jpg'),
-  ('From Disk Till Tvätt', 1996, 'img/movie/from-dusk-till-dawn.jpg')
-;
-
-INSERT INTO Movie (title, year, image) VALUES
-  ('Pu xxxxx', 1994, 'img/movie/six.jpg'),
-  ('xxxxx', 1994, 'img/movie/eight.jpg'),
-  ('gröten', 1994, 'img/movie/seven.jpg')
-;
-use movie;
-
-INSERT INTO Movie2Genre (idMovie, idGenre) VALUES
-    (6, 3),
-	  (6, 5),
-	    (6, 7),
-		  (7, 4),
-		    (7, 6)
-;
-use Movie2Genre;
-
-SELECT * FROM VMovie ;
 
 
+
+
+
+SELECT * FROM Movie ;

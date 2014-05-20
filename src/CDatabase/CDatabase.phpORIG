@@ -31,51 +31,39 @@ class CDatabase {
       'fetch_style' => PDO::FETCH_OBJ,
     );
     $this->options = array_merge($default, $options);
-    
+
     try {
       $this->db = new PDO($this->options['dsn'], $this->options['username'], $this->options['password'], $this->options['driver_options']);
     }
     catch(Exception $e) {
-        //throw $e; // For debug purpose, shows all connection details  
+      //throw $e; // For debug purpose, shows all connection details
       throw new PDOException('Could not connect to database, hiding connection details.'); // Hide connection details.
-    }    
-        $this->db->SetAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, $this->options['fetch_style']); 
+    }
+  
+    $this->db->SetAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, $this->options['fetch_style']); 
  // $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-   //----------------
     
-      /*  
-        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-echo $login;
-    
-$dsn      = 'mysql:host=localhost;dbname=Movie;';
+        
+    $dsn      = 'mysql:host=localhost;dbname=Movie;';
 $login    = 'bjvi13';
 $password = '';
 $options  = array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'");
 $pdo = new PDO($dsn, $login, $password, $options);
-
-        
-  
-*/
-    
+$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
     
   
   //  } 
     // Get debug information from session if any.
-/*
     if(isset($_SESSION['CDatabase'])) {
       self::$numQueries = $_SESSION['CDatabase']['numQueries'];
       self::$queries    = $_SESSION['CDatabase']['queries'];
       self::$params     = $_SESSION['CDatabase']['params'];
-      foreach($_SESSION as $key => $value) 
-{ 
-   // dumpa($value);//echo $key . " = " . $value . "<br>"; 
-}
       unset($_SESSION['CDatabase']);
     }
 	//	echo "Inside_CDatabase_construct_wwwwwwwwwwwwwwwwwww";
 	//	dumpa($default);
   
-  */
+  
   }
   /**
    * Getters
@@ -107,11 +95,17 @@ $pdo = new PDO($dsn, $login, $password, $options);
    * @param string $debug enables to save some extra debug information.
    */
   public function SaveDebug($debug=null) {
-    	
-if($debug) {
+    
+		
+		
+		
+		
+		if($debug) {
       self::$queries[] = $debug;
       self::$params[] = null;
     }
+
+		
 		
     self::$queries[] = 'Saved debuginformation to session.';
     self::$params[] = null;
@@ -132,22 +126,32 @@ if($debug) {
    * @param int $fetchStyle can be changed by sending in arguments.
    * @return array with resultset.
    */
-   
-  public function ExecuteSelectQueryAndFetchAll($query, $params=array(), $debug=false) {
- 
-    self::$queries[] = $query; 
+  public function ExecuteSelectQueryAndFetchAll($query, $params=array(), $debug=false, $fetchStyle=null) {
+
+        // Log details on the query
+
+    self::$queries[] = $logQuery;
     self::$params[]  = $params; 
     self::$numQueries++;
 
-    if($debug) {
-      echo "<p>Query = <br/><pre>{$query}</pre></p><p>Num query = " . self::$numQueries . "</p><p><pre>".print_r($params, 1)."</pre></p>";
-    }
- 
+
+// Make the query
     $this->stmt = $this->db->prepare($query);
     $this->stmt->execute($params);
-    return $this->stmt->fetchAll();
+    $res = $this->stmt->fetchAll($fetchStyle);
+    
+        $rows = count($res);
+    $logQuery = $query . "\n\nResultset has $rows rows.";
+    echo "här ExecuteSelectQueryAndFetchAll";
+dumpa($res);
+
+    // Debug if set
+    if($debug) {
+      echo "<p>Query = <br/><pre>{$logQuery}</pre></p><p>Num query = " . self::$numQueries . "</p><p><pre>".print_r($params, 1)."</pre></p>";
+    }
+
+    return $res;
   }
-   
 
 //=================================================== 
 
@@ -160,19 +164,29 @@ if($debug) {
    * @return boolean returns TRUE on success or FALSE on failure. 
    */
   public function ExecuteQuery($query, $params = array(), $debug=false) {
- 
-    self::$queries[] = $query; 
+
+    // Make the query
+    $this->stmt = $this->db->prepare($query);
+    $res = $this->stmt->execute($params);
+
+    // Log details on the query
+    $error = $res ? null : "\n\nError in executing query: " . $this->ErrorCode() . " " . print_r($this->ErrorInfo(), 1);
+    $logQuery = $query . $error;
+    self::$queries[] = $logQuery; 
     self::$params[]  = $params; 
     self::$numQueries++;
- 
-    if($debug) {
-      echo "<p>Query = <br/><pre>{$query}</pre></p><p>Num query = " . self::$numQueries . "</p><p><pre>".print_r($params, 1)."</pre></p>";
-    }
- 
-    $this->stmt = $this->db->prepare($query);
-    return $this->stmt->execute($params);
-  }
 
+    // Debug if set
+    if($debug) {
+      echo "<p>Query = <br/><pre>".htmlentities($logQuery)."</pre></p><p>Num query = " . self::$numQueries . "</p><p><pre>".htmlentities(print_r($params, 1))."</pre></p>";
+    }
+
+   // return $res;
+        $this->stmt = $this->db->prepare($query);
+    return $this->stmt->execute($params);
+    
+    
+  }
 
 //=================================================== 
 
