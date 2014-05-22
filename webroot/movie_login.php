@@ -29,7 +29,7 @@ $fromdb = $log->GetDBaseLogin($bwix['database']);
 $bwix['main'] = <<<EOD
 {$fromdb}
 {$bwix['byline']}
-</article>
+
 EOD;
 
 include(BWI_THEME_PATH);

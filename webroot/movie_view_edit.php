@@ -1,4 +1,4 @@
- <?php 
+<?php 
 /**
  * This is a Anax pagecontroller.
  *
@@ -6,17 +6,9 @@
 // Include the essential config-file which also creates the $anax variable with its defaults.
 include(__DIR__ . '/config.php'); 
 session_name(preg_replace('/[:\.\/-_]/', '', __DIR__));
-if (!isset($_SESSION)) { session_start(); }
 
-if(isset($_SESSION['filmhandle'])) {
-  $handle = $_SESSION['filmhandle'];
-}
-else {
-	$handle = new CFilmHandle();
-  $_SESSION['filmhandle'] = $handle;
-}
 
-$bwix['stylesheets'][] = '//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css';
+//$bwix['stylesheets'][] = '//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css';
 
 $bwix['inlinestyle'] = "
 .orderby a {
@@ -75,6 +67,18 @@ select {
 // Connect to a MySQL database using PHP PDO
 $db = new CDatabase($bwix['database']);
 
+
+if (!isset($_SESSION)) { session_start(); }
+
+if(isset($_SESSION['filmhandle'])) {
+  $handle = $_SESSION['filmhandle'];
+}
+else {
+	$handle = new CFilmHandle();
+  $_SESSION['filmhandle'] = $handle;
+}
+
+
 if(isset($_SESSION['logge'])) {
   $log = $_SESSION['logge'];
 }
@@ -106,7 +110,7 @@ else {
 if(!$way)
     {
    // echo "NOPE";
-    $tr = "<h3> Du är inte inloggad. Logga in till databasen.<h3>";
+    $tr = " Du är inte inloggad. Logga in till databasen.";
     }
  else {
 // Do SELECT from a table
@@ -115,13 +119,16 @@ $res = $db->ExecuteSelectQueryAndFetchAll($sql);
 
 
 // Put results into a HTML-table
-$tr = "<tr><th>Rad</th><th>Id</th><th>Bild</th><th>Titel</th><th>År</th><th></th></tr>";
+$tr = "<table>";
+$tr .= "<tr><th>Rad</th><th>Id</th><th>Bild</th><th>Titel</th><th>År</th><th></th></tr>";
 foreach($res AS $key => $val) {
   $tr .= "<tr><td>{$key}</td><td>{$val->id}</td><td><img width='80' height='40'"
   . " src='{$val->image}' alt='{$val->title}' /></td><td>{$val->title}</td>"
   . "<td>{$val->year}</td><td class='menu'><a href='movie_edit.php?id={$val->id}'><i class='icon-edit'></i></a></td></tr>";
-}
 
+  
+  }
+$tr .= "</table>";
  }  
  //echo "YESS";}
 
@@ -136,12 +143,11 @@ $acronym = isset($_SESSION['user']) ? $_SESSION['user']->acronym : null;
 
 $bwix['main'] = <<<EOD
 <h1>{$bwix['title']}</h1>
-<table>
+<h3>$pluppas</h3>
 {$tr}
-</table>
 
 <div class=debug>{$sqlDebug}</div>
-
+{$bwix['byline']}
 EOD;
 
 

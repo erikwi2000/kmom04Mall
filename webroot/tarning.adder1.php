@@ -28,5 +28,5 @@ $bwix['main'] .= <<<EOD
 {$diceList}
 {$statString}
 {$bwix['byline']}
-</article> 
+ 
 EOD;

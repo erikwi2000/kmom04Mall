@@ -7,7 +7,7 @@
 include(__DIR__.'/config.php'); 
 session_name(preg_replace('/[:\.\/-_]/', '', __DIR__));
 if (!isset($_SESSION)) { session_start(); }
-
+/*
 if(isset($_SESSION['filmhandle'])) {
   $handle = $_SESSION['filmhandle'];
 }
@@ -15,7 +15,7 @@ else {
 	$handle = new CFilmHandle();
   $_SESSION['filmhandle'] = $handle;
 }
-
+*/
 /*
 if(isset($_SESSION['cdatabase'])) {
   $db = $_SESSION['cdatabase'];
@@ -27,9 +27,18 @@ else {
   $_SESSION['cdatabase'] = $db;
 }
 */
+/*
+if(isset($_SESSION['logge'])) {
+  $log = $_SESSION['logge'];
+  //echo "logge old";
+}
+else {
+	$log = new CUser();
+  $_SESSION['logge'] = $log;
+ // echo "loggenew";
+}
 
-
-
+*/
 
 $bwix['inlinestyle'] = "
 .orderby a {
@@ -74,13 +83,7 @@ select {
 
 // Connect to a MySQL database using PHP PDO
 $db = new CDatabase($bwix['database']);
-$_SESSION['cdatabase'] = $db;
-
-
-
-
-
-
+//$_SESSION['cdatabase'] = $db;
 
 
 // Get parameters 
@@ -95,6 +98,8 @@ $acronym = isset($_SESSION['user']) ? $_SESSION['user']->acronym : null;
 
 $acronym = isset($_SESSION['user']) ? $_SESSION['user']->acronym : null;
 //dumpa($acronym);
+
+
 if($acronym) {
   $output = "Du är inloggad som: $acronym ({$_SESSION['user']->name})";
   $way = TRUE;
@@ -110,11 +115,11 @@ else {
 $bwix['title'] = "Skapa ny film";
 if(!$way) {
         //echo "NOPE";
-    $tr = "<h3> Du är inte inloggad. Logga in till databasen.<h3>";
+    $tr = "<h3> Du är inte inloggad. Logga in till databasen.</h3>";
     $bwix['main'] = <<<EOD
 <h1>{$bwix['title']}</h1>
 {$tr}
-
+{$bwix['byline']}
 
 EOD;
     
@@ -135,7 +140,7 @@ if($create) {
 }
  
 
-
+/*
 if(isset($_SESSION['logge'])) {
   $log = $_SESSION['logge'];
  // echo "logge old";
@@ -145,9 +150,14 @@ else {
   $_SESSION['logge'] = $log;
   //echo "loggenew";
 }
-
+*/
 //Check of logged in
-$pluppas = $log->CheckLoggedIn($bwix['database']);
+//
+//
+$pluppas = $db->CheckLoggedIn($bwix['database']);
+//<h3>{$pluppas}</h3>
+//
+//
 //echo $pluppas;
 // Do it and store it all in variables in the Anax container.
 
@@ -165,7 +175,7 @@ $bwix['main'] = <<<EOD
   <p><input type='submit' name='create' value='Skapa'/></p>
   </fieldset>
 </form>
-
+{$bwix['byline']}
 EOD;
  }
  

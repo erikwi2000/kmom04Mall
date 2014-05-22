@@ -65,12 +65,7 @@ ul.nb-plain a:hover {
 }
 
 
-// nb-plain2 for Film
 
-/** --------------------------------------------------------------
- * Navbar: Plain style, nothing special
- *
- */
 
  
 ul.nb-plain2 {
@@ -113,7 +108,7 @@ ul.nb-plain2 li:first-child {
   padding-left: 1px;
   padding-top: 1px;
   padding-bottom: 1px;
-  padding-right: 1px;  
+  padding-right: 3px;  
     margin-top: 1px;
   margin-left: 1px;
     margin-right: 1px;

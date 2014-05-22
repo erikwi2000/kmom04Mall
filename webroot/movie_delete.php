@@ -186,7 +186,7 @@ EOD;
 $bwix['main'] = <<<EOD
 {$trxx}
 {$bwix['byline']}
-</article>
+
 EOD;
 
 

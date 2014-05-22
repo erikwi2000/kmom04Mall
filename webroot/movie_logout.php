@@ -34,7 +34,7 @@ $fromdb = $log->GetDBaseLogout($bwix['database']);
 $bwix['main'] = <<<EOD
 {$fromdb}
 {$bwix['byline']}
-</article>
+
 EOD;
 
 

@@ -27,7 +27,7 @@ else {
 //dumpa($bwix['database']);
 
 //SOF-----------------------------------
-$bwix['stylesheets'][] = '//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css';
+//$bwix['stylesheets'][] = '//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css';
 
 $bwix['inlinestyle'] = "
 .orderby a {
@@ -161,7 +161,7 @@ EOD;
 $bwix['main'] = <<<EOD
 {$trxx}
 {$bwix['byline']}
-</article>
+
 EOD;
 // Finally, leave it all to the rendering phase of BWi.
 

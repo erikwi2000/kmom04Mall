@@ -136,7 +136,7 @@ $bwix['main'] = <<<EOD
   <div class='pages'>{$navigatePage}</div>
 </div>
   {$bwix['byline']}
-</article>
+
 EOD;
 
 // Finally, leave it all to the rendering phase of BWi.

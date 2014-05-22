@@ -107,7 +107,7 @@ $tr .= "</table>";
 $bwix['main'] = <<<EOD
 {$tr}
 {$bwix['byline']}
-</article>
+
 EOD;
 
 // Finally, leave it all to the rendering phase of BWi.

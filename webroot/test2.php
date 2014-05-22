@@ -94,7 +94,7 @@
   </nav>
 
 </footer>
-</article></div>
+</div>
 
     <div id='footer'><footer><span class='sitefooter'>Copyright (c) Björn Viklund (bjvi13@student.bth.se) |
  Björn Wiklund (erikwi2000@gmail.com)  | 

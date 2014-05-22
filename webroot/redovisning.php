@@ -246,7 +246,7 @@ Men en sak ska sägas: <h4>Man lär sig himla mycket</h4> men det tar alldeles f
 
 {$bwix['byline']}
 
-</article>
+
 
 EOD;
 

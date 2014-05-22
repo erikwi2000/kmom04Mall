@@ -109,7 +109,7 @@ Har jobbat med att gå ner i vikt tre gånger på allvar. Tre varianter: pulver 
 
 {$bwix['byline']}
 
-</article>
+
 
 EOD;
 

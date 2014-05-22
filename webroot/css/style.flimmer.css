@@ -92,6 +92,7 @@ h1 {
 	background-color: #F21100;
 	  	border-radius:3px;
 	border:2px solid #4b8f29;
+      
 
 }
 
@@ -130,6 +131,7 @@ h1 {
 .byline {
   border-top: 1px dashed #ccc;
   font-style: italic;
+  width: 500px;
 }
 
 

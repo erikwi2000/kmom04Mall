@@ -28,7 +28,7 @@ $acronym = isset($_SESSION['user']) ?  $_SESSION['user']->acronym : null;
 
 
 
-/*
+
 if(isset($_SESSION['filmhandle'])) {
   $handle = $_SESSION['filmhandle'];
 }
@@ -37,7 +37,7 @@ else {
   $_SESSION['filmhandle'] = $handle;
 }
 
-*/
+
 //*
 
 /*
@@ -69,7 +69,7 @@ EOD;
 $bwix['main'] = <<<EOD
 
 {$bwix['byline']}
-</article>
+
 EOD;
 
 
